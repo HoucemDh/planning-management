@@ -1,0 +1,652 @@
+
+type CdeAchat {
+    id_cdeachat: ID!
+    noCommande: String!
+    dateCommande: String
+    dateReceptPrevue: String
+    fournisseur: String
+    raisonSociale: String
+    article: String
+    designation: String
+    quantiteUa: Float
+    quantiteUs: Float
+    uniteAchat: String
+    resteLivrer: Float
+    devise: String
+    prixBrut: Float
+    montantLigne: Float
+    pays: String
+    conditionPaiement: String
+    ligneSoldee: Int
+    soldeReception: Int
+    qteReceptUa: Float
+    qteFactureUa: Float
+    resteLivrerUs: Float
+    modeLivraison: String
+    typeAchat: Int
+    pieceOrigine: String
+    categorie: String
+    facturee: Int
+    imprimee: Int
+    signee: Int
+    dateConfirmFrs: String
+    dateRecFacture: String
+    dateDocTransport: String
+    dateEmbarquement: String
+    datePrevueArrPort: String
+    dateAvisArrivee: String
+    dateRecSite: String
+
+      mois: String  
+     dateCalcul: String 
+}
+type Mvst{
+    id_cdeachat: ID!
+    article: String
+    designation: String
+    Date_imputation: String
+    Quantite_US: Float
+    Unite_stock: String
+    Quantite: Float
+    Unite: String
+    statut: String
+    Lot: String
+    S_lot: String
+    Identifiant1: String
+    Identifiant2: String
+    Lot_fournisseur: String
+    Emplacement: String
+    Type_transaction: Int
+    Tiers: String
+    Type_piece: Int
+    Piece: String
+    Piece_origine: String
+    No_ligne_piece: Int
+    Date_creation: String
+    Operateur_creation: String
+    Date_peremption: String
+    DLU: String
+    Affaire: String
+}
+
+type CdeVente {
+    id_cdevente: ID!
+    noCommande: String!
+    clientCommande: String!
+    raisonSociale: String!
+    article: String!
+    designation: String!
+    qteCommandeeUS: Float!
+    qteAlloueeUS: Float!
+    qteLivreeUS: Float!
+    qteFactureeUS: Float!
+    qteRestanteNonLivree: Float
+    qteRestanteNonFacturee: Float
+    dateLivDemandee: String
+    dateLivPrevue: String
+    etatLigne: Int!
+    facturee: Int!
+    noLivraison: String!
+    statutOrdre: Int!
+    operateurCreation: String!
+    prixBrut: Float!
+    montantRestantNonLivre: Float
+    montantRestantNonFacturee: Float
+    prixNetHT: Float!
+    prixNet: Float!
+    refCommandeClient: String!
+    dateCommande: String
+    conditionPaiement: String!
+    paysCommande: String!
+    paysLivraison: String!
+    paysFacture: String!
+    noFactureProforma: String!
+    facturation: Float!
+    signee: Int!
+}
+
+type Crltof {
+    id_Crltof: ID!
+    noOrdre: String!
+    article: String!
+    destinationOF: String!
+    lot: String!
+    statutOrdre: Int!
+    dateCreation: String!
+    quantitePrevue: Float!
+    dateDebut: String!
+    dateFin: String!
+    qteRealiseeTot: Float!
+    qteRealiseeCQ: Float!
+    quantiteRestante: Float!
+    qteRealiseeRejetee: Float!
+    articlePF: String!
+    statutMatiere: Int!
+    designation1: String!
+    designation2: String!
+    quantiteBesoin: Float!
+    quantiteAllouee: Float!
+    quantiteConsommee: Float!
+    ecartQteBesoinEtQteConsommee: Float
+    statutAllocation1: Int!
+    datePremierSuivi: String!
+    dateDernierSuivi: String!
+    statutAllocation: Int!
+}
+
+type Ofenc {
+    id_ofenc: ID!
+    numOrdre: String!
+    statutOrdre: Int!
+    dateCreation: String
+    article: String
+    section: String
+    designation: String
+    designation2: String
+    lot: String
+    quantiteLct: Float
+    quantiteRestante: Float
+    destinationOF: String
+}
+
+
+
+type Globalstock {
+    id_GStock: ID!
+    article: String!
+    designation: String!
+    designation2: String
+    categorie: String
+    quantiteUS: Float!
+    uniteStock: String
+    quantiteActiveUS: Float!
+    quantiteAllouee: Float!
+    dateMVT: String
+    lot: String
+    sLot: String
+    identifiant: String
+    identifiant2: String
+    emplacement: String
+    statut: String
+    lotFournisseur: String
+    datePeremption: String
+    dateRecontrole: String
+    demandeAnalyse: String
+    quantiteUC: Float!
+    coefUCUS: Float!
+}
+
+type Bom {
+    id_bom: ID!
+    codeproduit: String
+    BOM_Alternative: Int
+    Categorie_Produit: String
+    libellesPF: String
+    taillelot: Float
+    article: String
+    libellesMP: String
+    Qte_besoin: Float
+    unite: String
+}
+
+
+type Stock {
+    id_stock: ID!
+    article: String
+    designation: String
+    Unite: String
+    Famille: String
+    QuantiteA: Float
+    QuantiteAC: Float
+    SommeA_AC: Float
+    QuantiteQ: Float
+    QuantiteQPR: Float
+    OFPlanifie: Float
+    OFSuggere: Float
+    SommeOFFerme: Float
+    sommeDA: Float
+    SommeCDE: Float
+    UniteStock: String
+    NBlinge: Int
+    Qinimum: Float
+    PMP: Float
+    Pays: String
+    Leadtime: Float
+    Stocksecurite: Float
+    Dispo_Of: Float
+    besoin_actuelle: Float
+    stockFinMois: Float
+    monthlyNeeds: [MonthlyNeed]
+    stockFinMoisInclusLiv: [QuantiteUsParMois!]!
+
+
+
+}
+
+type QuantiteUsParMois {
+  mois: String
+  quantiteUs: Float
+  stockFinMoisInclusLiv: Float
+
+}
+
+type Cde {
+    id_cde: ID!
+    nocommande: String
+    Date_commande: String
+    Date_recept_prevue: String
+    Fournisseur: String
+    raisonsociale: String
+    article: String
+    Designation: String
+    Quantite_UA: Float
+    Quantite_US: Float
+    Unite_achat: String
+    Reste_livrer: Float
+    Devise: String
+    Prix_brut: Float
+    Montant_ligne: Float
+    Pays: String
+    Condition_paiement: String
+    Ligne_soldee: Int
+    Solde_Reception: Int
+    Qte_Recept_UA: Float
+    Qte_Facture_UA: Float
+    Reste_livrer_US: Float
+    Mode_livraison: String
+    Type_Achat: Int
+    Piece_Origine: String
+    Categorie: String
+    Facturee: Int
+    Imprimee: Int
+    Signee: Int
+    Date_confirm_frs: String
+    Date_rec_facture: String
+    Date_doc_transport: String
+    Date_embarquement: String
+    Date_prevue_arr_port: String
+    Date_avis_arrivee: String
+    Date_rec_site: String
+    dispo_of: Float
+}
+type BomN {
+    id: ID!
+    codeproduit: String
+    categorieProduit: String
+    libellesPf: String
+    taillelot: Float
+    article: String
+    libellesMp: String
+    qteBesoin: Float
+    unite: String
+    resteLancer: Int
+    besoinMpMois: Float
+    pdp: Plan
+    bom: Bom!
+    resteLancerParMois:  [MonthValue!]
+    besoinMpParMois: [MonthDecimalValue!]!
+}
+
+type MonthValue {
+  month: String!
+  value: Int!
+  year:Int!
+  codeProduit:String!
+}
+
+type MonthDecimalValue {
+  month: String!
+  value: Float!
+  year:Int!
+  codeProduit:String! 
+}
+type MonthlyNeed {
+    month: String!
+    value:  Float!
+    stockFinMois: Float!
+  }
+
+type Plan {
+   id: ID!
+    ref: String
+    libelle: String
+    mois: String
+    prevueLancer: Int
+    lancerActuelle: Int
+    resteLancer: Int
+    tailleLot: Int
+    year: Int
+   produit: Produit
+
+}
+type Produit {
+    id: ID!
+    libelle: String!
+    reference: String!
+    tailleLot: Int!
+
+}
+type rotationMp {
+    idRotation: ID!
+    dispoof: Float
+}
+
+type PageInfo {
+    pageNumber: Int!
+    pageSize: Int!
+    totalElements: Int!
+    totalPages: Int!
+    hasNext: Boolean!
+    hasPrevious: Boolean!
+}
+
+type StockPage {
+    content: [Stock!]!
+    pageInfo: PageInfo!
+}
+
+type GlobalstockPage {
+    content: [Globalstock!]!
+    pageInfo: PageInfo!
+}
+
+type MvstStockPage{
+    content : [Mvst!]!
+    pageInfo: PageInfo!
+}
+
+type CdePage{
+    content:[Cde!]!
+    pageInfo: PageInfo!
+}
+type PagedResponseBomN {
+    content: [BomN]
+    pageInfo: PageInfo
+}
+type rotationPage{
+    content : [rotationMp!]!
+    pageInfo : PageInfo!
+}
+type PlanPage {
+  content: [Plan!]!
+  pageInfo: PageInfo!
+}
+type PagedResponseOfenc {
+    content: [Ofenc!]!
+    pageInfo: PageInfo!
+}
+type PagedResponseStock {
+    content: [Stock]
+    pageInfo: PageInfo
+}
+type PagedResponseCrltof {
+    content: [Crltof!]!
+    pageInfo: PageInfo!
+}
+
+type PagedResponseCdeAchat {
+    content: [CdeAchat!]!
+    pageInfo: PageInfo!
+}
+
+type PagedResponseCdeVente {
+    content: [CdeVente!]!
+    pageInfo: PageInfo!
+}
+
+type PagedResponseBom {
+    content: [Bom!]!
+    pageInfo: PageInfo!
+}
+
+
+type StockAnalysis {
+    analysis: String
+    recommendedAction: String
+    confidence: Float 
+}
+
+type AuthError {
+    message: String!
+    code: String!
+}
+
+type User_Roles {
+    id: ID!
+    name: String!
+}
+
+type AppUser {
+    id: ID!
+    username: String!
+    email: String!
+    roles: [User_Roles]!
+    auditLogs: [AuditLog]
+    active : Boolean
+}
+
+type AuthResponse {
+    token: String!
+    appUser: AppUser!
+}
+
+type LogoutResponse {
+    success: Boolean!
+    message: String!
+}
+
+type RoleResponse {
+    success: Boolean!
+    message: String!
+    User_Roles: User_Roles
+}
+
+input LoginInput {
+    username: String!
+    password: String!
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  password: String!
+  roleIds: [ID!]
+}
+
+type UserPayload {
+  id: ID
+  username: String
+  email: String
+  active: Boolean
+  roles: [Role]
+  message: String
+}
+
+
+input RoleInput {
+    name: String!
+}
+
+type RolePayload {
+    id: ID
+    name: String!
+    message: String!
+}
+
+type Role {
+    id: ID!
+    name: String!
+}
+
+type AuditLog {
+    id: ID!
+    action: String!
+    details: String!
+    ipAddress: String
+    createdAt: String!
+    user: AppUser
+}
+type AuditLogs {
+  id: ID!
+  action: String!
+  username: String!
+  entityType: String
+  entityId: String
+  oldValue: String
+  newValue: String
+  timestamp: String
+}
+
+
+
+
+
+input BomNInput {
+    codeproduit: String!
+    categorieProduit: String
+    libellesPf: String
+    libellesMp: String
+    taillelot: String
+    article: String
+    qteBesoin: Float
+    unite: String
+}
+
+
+
+
+type Mutation {
+    generateRotationMp: Boolean!
+    addPlan(libelle: String!, mois: String!, prevueLancer: Int!, lancerActuelle: Int!, tailleLot: Int!, year: Int!): Plan
+       
+    updatePlanByLibelle(libelle: String!, year: Int!, mois: String!, prevueLancer: Int!, lancerActuelle: Int!): Plan
+
+    updateAllBesoinMoisForYear(year: Int!): Boolean
+
+    updateAllStockValues: Boolean!
+    updateAllStockValuesForYearAndMonth(year: Int!, month: String!): Boolean!
+
+    calculateFieldsForAll: String
+
+    updateBesoinMoisForArticle(year: Int!, articleCode: String!): Stock!
+
+
+
+    login(input: LoginInput!): AuthResponse!
+    logout: LogoutResponse!
+    createRole(input: RoleInput!): RolePayload!
+    updateRole(id: ID!, input: RoleInput!): RolePayload
+    createUser(input: UserInput!): UserPayload!
+    updateUser(id: ID!, input: UserInput!): UserPayload
+    deactivateUser(id: ID!): UserPayload
+    reactivateUser(id: ID!): UserPayload
+    deleteRole(id : ID!): Boolean!
+
+
+
+     affecterProduitsAuPdp: String
+
+    addBomN(
+        codeproduit: String!,
+        categorieProduit: String,
+        libellesPf: String,
+        libellesMp: String,
+        taillelot: String,
+        article: String!,
+        qteBesoin:  Int!,
+        unite: String
+    ): BomN
+
+
+mettreAJourBomN(
+        id: ID!,
+        codeproduit: String,
+        categorieProduit: String,
+        libellesPf: String,
+        libellesMp: String,
+        taillelot: String,
+        article: String,
+        qteBesoin: Int,
+        unite: String
+    ): BomN
+
+
+
+ generateBomN(year: Int!): [BomN]
+
+
+
+
+
+
+  #ai
+  AnalysisResult(designation: String!): StockAnalysis 
+  exportAnalysisPdf(designation: String!): String! 
+  shareAnalysisByEmail(designation: String!, email: String!): Boolean!
+
+
+
+
+
+}
+
+
+type Query {
+
+   getAllStocks: [Stock!]!
+
+    getAllArticles(page: Int = 0, size: Int = 20, query: String = ""): GlobalstockPage!
+    getAllCde(page: Int = 0, size: Int = 20, query: String = ""): CdePage!
+    getMvstPages(page: Int = 0, size: Int = 20, query: String = ""): MvstStockPage!
+    getAllRotationMp(page: Int = 0, size: Int = 20): rotationPage!
+    getOfencPages(page: Int!, size: Int!, query: String): PagedResponseOfenc!
+    getCrltofPages(page: Int!, size: Int!, query: String): PagedResponseCrltof!
+    getCdeAchatPages(page: Int!, size: Int!, query: String): PagedResponseCdeAchat!
+    getCdeVentePages(page: Int!, size: Int!, query: String): PagedResponseCdeVente!
+    getBomPages(page: Int!, size: Int!, query: String): PagedResponseBom!
+    getStockPages(page: Int!, size: Int!, query: String): PagedResponseStock!
+    getBomNPages(page: Int!, size: Int!, query: String): PagedResponseBomN
+    
+    getPlans: [Plan]
+    getPlansByYear(year: Int!): [Plan]
+    getLibelles: [String]
+    getProductByLibelle(libelle: String!): Produit
+    searchPlans(year: Int!, libelle: String!): [Plan]
+
+    
+
+  
+    getBomNById(id: ID!): BomN
+    getAllBomN: [BomN]
+   
+    calculateDispoOf(stockId: ID!): Float
+
+    getPdpsByMonthAndYear(mois: String!, year: Int!): [String]
+    getBomsByCodeProduit(codeproduit: String!): [String]
+    recupererResteLancerParMois(year: Int!): [BomN]
+
+
+#USER_management
+    getAllUsers : [AppUser!]!
+    getAllRoles: [User_Roles!]!
+    getUserAuditLogs(userId: ID!): [AuditLog]
+    
+    users: [AppUser]
+    user(id: ID!): AppUser
+ 
+ #BOMN
+    allBomN: [BomN]
+    bomNById(id: Int!): BomN
+    getPaginatedBomN(page: Int!, size: Int!, query: String): [BomN]
+    getResteLancerByMonth(year: Int!): [BomN]
+
+    exportNegativeStocksExcel: String
+
+
+
+
+    #audit
+   getAuditLogs: [AuditLogs]
+
+
+}
