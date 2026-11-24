@@ -24,12 +24,19 @@ A full-stack platform for internal planning and management, built with
 | Data | ETL pipeline, scheduled jobs |
 | Testing | Apache JMeter |
 
+
+## Challenges & Solutions
+### 1. We needed to transfer cleaned data from Azure Cloud to SQL Server and make sure the database was updated regularly without doing everything manually.
+
+**Solution:**I worked on this process using the following steps: 
+    1. Create a Pipeline: Used Visual Studio to connect Azure Cloud with SQL Server. 
+    2. Load the Data: Set up the pipeline to retrieve cleaned data from Azure and store it in SQL Server. 3. Create SQL Server Jobs: Created jobs in SQL Server Agent to automate the data loading process. 4. Schedule the Jobs: Configured the jobs to run twice a day, keeping the database updated automatically.
+
+
 ## Screenshots
 ![Home page](docs/screenshots/home.png)
 ![Login page](docs/screenshots/login.png)
 ![Dashboard](docs/screenshots/dashboard1.png)
-![User-Management](docs/screenshots/user_man.png)
-![Ai-Analaysis](docs/screenshots/ai_analysis.png)
 
 ## Getting Started
 
@@ -69,3 +76,4 @@ Open http://localhost:4200
     ├── Angular/hikmaprj/        # Angular frontend
     ├── Springboot/hikmaproject/ # Spring Boot backend
     └── docs/screenshots/        # README images
+
