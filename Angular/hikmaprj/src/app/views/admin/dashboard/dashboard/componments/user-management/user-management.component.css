@@ -1,0 +1,470 @@
+/* Admin Dashboard CSS - Enhanced Professional Style */
+/* Update the content-wrapper style */
+.content-wrapper {
+  margin-left: 280px; /* This should match your sidebar width */
+  padding: 40px 60px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  background-color: #f8fafd;
+  color: #333a56;
+  position: relative;
+  width: calc(100% - 280px); /* Add this to ensure proper width calculation */
+  box-sizing: border-box; /* Add this to include padding in the width calculation */
+}
+
+/* Header Section Styling - Enhanced professional look */
+.section-header {
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e0e5ee;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-header h2 {
+  color: #0a2463;
+  font-size: 32px;
+  font-weight: 700; /* Increased weight for more prominence */
+  position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px; /* Tighter letter spacing for modern look */
+}
+
+.section-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  width: 120px; /* Slightly wider underline */
+  height: 4px; /* Slightly thicker for emphasis */
+  background: linear-gradient(to right, #FF5C57, rgba(255, 92, 87, 0.7)); /* Gradient for refined look */
+  border-radius: 4px;
+}
+
+.section-header p {
+  color: #586885;
+  font-size: 16px;
+  margin-top: 5px;
+  max-width: 80%;
+}
+
+/* Card Box Styling - Enhanced for professional appearance */
+.cardBox {
+  width: 100%;
+  padding: 20px 0;
+}
+
+.cardBox .lists {
+  display: grid; /* Using grid for more precise layout */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px; /* Increased spacing between cards */
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.cardBox .card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* Refined shadow */
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(240, 240, 240, 0.8);
+  height: 100%; /* Ensure consistent height */
+}
+
+.cardBox .card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px; /* Slightly wider indicator bar */
+  background: linear-gradient(to bottom, #FF5C57, rgba(255, 92, 87, 0.8)); /* Gradient for polish */
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cardBox .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardBox .card:hover::before {
+  opacity: 1;
+}
+
+.cardBox .card .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 28px; /* Increased padding for more breathing room */
+  color: #586885;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  height: 100%; /* Make entire card clickable */
+}
+
+.cardBox .card:hover .nav-link {
+  color: #0a2463;
+}
+
+.cardBox .card .icon-card {
+  font-size: 24px;
+  min-width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  background: #f5f8fd; /* Refined background for icons */
+  border-radius: 14px; /* Slightly more rounded */
+  color: #0a2463;
+  transition: all 0.3s ease;
+}
+
+.cardBox .card:hover .icon-card {
+  background: linear-gradient(135deg, #FF5C57, rgba(255, 92, 87, 0.9)); /* Gradient for more polish */
+  color: white;
+  box-shadow: 0 8px 15px rgba(255, 92, 87, 0.2);
+}
+
+.cardBox .card .content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardBox .card .link {
+  font-size: 18px;
+  font-weight: 600; /* More prominent */
+  letter-spacing: 0.2px;
+  color: #333a56;
+  margin-bottom: 5px;
+}
+
+.cardBox .card .description {
+  font-size: 14px;
+  color: #667790;
+  margin-top: 5px;
+}
+
+/* Add statistics display for cards that need it */
+.cardBox .card .stats {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.cardBox .card .stats-number {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0a2463;
+}
+
+.cardBox .card .stats-label {
+  font-size: 13px;
+  color: #667790;
+  margin-left: 5px;
+}
+
+.cardBox .card .trend {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cardBox .card .trend.up {
+  color: #2ecc71;
+}
+
+.cardBox .card .trend.down {
+  color: #e74c3c;
+}
+
+.cardBox .card .trend i {
+  margin-right: 4px;
+  font-size: 11px;
+}
+
+/* Badge for indicating new or priority items */
+.cardBox .card .badge-custom {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 92, 87, 0.1);
+  color: #FF5C57;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Styles - Enhanced */
+@media (max-width: 1200px) {
+  .cardBox .lists {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 992px) {
+  .content-wrapper {
+    margin-left: 280px;
+    padding: 35px 40px;
+  }
+
+  .cardBox .lists {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .section-header h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    margin-left: 0;
+    padding: 25px 20px;
+  }
+
+  .cardBox .lists {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header h2 {
+    font-size: 26px;
+  }
+
+  .section-header p {
+    max-width: 100%;
+  }
+
+  .cardBox .card .nav-link {
+    padding: 22px;
+  }
+}
+
+/* Style for active card state - Enhanced */
+.cardBox .card.active {
+  background: rgba(10, 36, 99, 0.02);
+  border-left: none;
+}
+
+.cardBox .card.active::before {
+  opacity: 1;
+  width: 5px;
+}
+
+.cardBox .card.active .nav-link {
+  color: #0a2463;
+  font-weight: 500;
+}
+
+.cardBox .card.active .icon-card {
+  background: linear-gradient(135deg, #FF5C57, rgba(255, 92, 87, 0.9));
+  color: white;
+  box-shadow: 0 8px 15px rgba(255, 92, 87, 0.2);
+}
+
+/* Animation effect similar to sidebar - Enhanced */
+@keyframes gentle-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.cardBox .card.active .icon-card i {
+  animation: gentle-pulse 3s infinite ease-in-out;
+}
+
+/* Adjust content wrapper when sidebar is collapsed */
+.content-wrapper.sidebar-collapsed {
+  margin-left: 80px;
+  width: calc(100% - 80px); /* Add this to adjust width when sidebar is collapsed */
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Section divider with title */
+.section-divider {
+  display: flex;
+  align-items: center;
+  margin: 40px 0 30px;
+}
+
+.section-divider span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0a2463;
+  margin-right: 15px;
+}
+
+.section-divider::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(224, 229, 238, 0.8), rgba(224, 229, 238, 0.2));
+}
+
+/* Quick actions panel */
+.quick-actions {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0 30px;
+  flex-wrap: wrap;
+}
+
+.quick-action-btn {
+  padding: 12px 20px;
+  background: white;
+  border: 1px solid #e0e5ee;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #586885;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-action-btn:hover {
+  background: #f5f8fd;
+  border-color: #d8deea;
+  color: #0a2463;
+}
+
+.quick-action-btn i {
+  margin-right: 8px;
+  font-size: 16px;
+  color: #FF5C57;
+}
+
+/* Table styling for data presentation */
+.data-table-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  margin: 30px 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.data-table th {
+  background: #f8fafd;
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0a2463;
+  border-bottom: 1px solid #e0e5ee;
+}
+
+.data-table td {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #586885;
+  border-bottom: 1px solid #f0f4f8;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tr:hover td {
+  background: rgba(245, 248, 253, 0.5);
+}
+
+/* Status indicators */
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+}
+
+.status.pending {
+  background: rgba(241, 196, 15, 0.1);
+  color: #f1c40f;
+}
+
+.status.inactive {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+/* Summary cards for KPIs */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.summary-card {
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-card .title {
+  font-size: 14px;
+  color: #586885;
+  margin-bottom: 15px;
+}
+
+.summary-card .value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0a2463;
+  margin-bottom: 10px;
+}
+
+.summary-card .chart {
+  margin-top: auto;
+  height: 50px;
+  border-top: 1px solid #f0f4f8;
+  padding-top: 15px;
+}
+
+/* Custom scrollbar to match sidebar */
+.content-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+.content-wrapper::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 92, 87, 0.2);
+  border-radius: 10px;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 92, 87, 0.3);
+}

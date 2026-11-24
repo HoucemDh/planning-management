@@ -1,0 +1,153 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<nav>
+  <a (click)="goBack()">
+    <i class='bx bxs-left-arrow-circle back'></i>
+  </a>
+  <img src="assets/hikma.png" width="90px">
+  <div class="search-container">
+    <input 
+      type="text" 
+      [(ngModel)]="searchQuery" 
+      (input)="onSearchInput($event)"
+      placeholder="Looking for something..." 
+      class="search-bar"
+      autocomplete="off">
+    <button class="search-btn">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</nav>
+<div class="main">  
+  <div class="table-container">
+
+       <!-- Error Message -->
+       <div *ngIf="error" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>{{ error }}</p>
+      </div>
+
+    <!-- Not found message -->
+    <div *ngIf="Cde.length === 0" class="not-found-message">
+      <i class="fas fa-search"></i>
+      <p>No results found{{ searchQuery ? ' for "' + searchQuery + '"' : '' }}</p>
+    </div>
+
+    <!-- Table shown when there are results -->
+    <table class="content-table" *ngIf=" Cde.length > 0">
+    <thead>
+      <tr>
+        <th>No_commande</th>
+        <th>Date_commande</th>
+        <th>Date_recept_prevue</th>
+       <th> Fournisseur</th>
+        <th>Raison_sociale</th>
+        <th>Article</th>
+        <th>Designation</th>
+        <th>Quantite_UA </th>
+        <th>Quantite_US</th> 
+        <th>Unite_achat</th>
+        <th>Reste_livrer 
+        <th>Devise</th>
+        <th>Prix_brut</th> 
+        <th>Montant_ligne </th>
+        <th>Pays</th>
+        <th>Condition_paiement</th>
+        <th>Ligne_soldee</th>
+        <th>Solde_Reception</th>
+        <th>Qte_Recept_UA</th>
+        <th>Qte_Facture_UA</th> 
+        <th>Reste_livrer_US</th> 
+        <th>Mode_livraison</th>
+        <th>Type_Achat</th>
+        <th>Piece_Origine</th>
+        <th>Categorie</th>
+        <th>Facturee</th>
+        <th>Imprimee</th>
+        <th>Signee</th>
+        <th>Date_confirm_frs</th>
+        <th>Date_rec_facture</th>
+        <th>Date_doc_transport</th>
+        <th>Date_embarquement</th>
+        <th>Date_prevue_arr_port</th>
+        <th>Date_avis_arrivee</th>
+        <th>Date_rec_site</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of Cde">
+        <td>{{c.nocommande}}</td>
+        <td>{{c.Date_commande}}</td>
+        <td>{{c.Date_recept_prevue}}</td>
+        <td> {{c.Fournisseur}}</td>
+        <td>{{c.raisonsociale}}</td>
+        <td>{{c.article}}</td>
+        <td>{{c.Designation}}</td>
+        <td>{{c.Quantite_UA}}</td>
+        <td>{{c.Quantite_US}}</td> 
+        <td>{{c.Unite_achat}}</td>
+        <td>{{c.Reste_livrer}}</td> 
+        <td>{{c.Devise}}</td>
+        <td>{{c.Prix_brut}}</td> 
+        <td>{{c.Montant_ligne}} </td>
+        <td>{{c.Pays}}</td>
+        <td>{{c.Condition_paiement}}</td>
+        <td>{{c.Ligne_soldee}}</td>
+        <td>{{c.Solde_Reception}}</td>
+        <td>{{c.Qte_Recept_UA}}</td>
+        <td>{{c.Qte_Facture_UA}}</td> 
+        <td>{{c.Reste_livrer_US}}</td> 
+        <td>{{c.Mode_livraison}}</td>
+        <td>{{c.Type_Achat}}</td>
+        <td>{{c.Piece_Origine}}</td>
+        <td>{{c.Categorie}}</td>
+        <td>{{c.Facturee}}</td>
+        <td>{{c.Imprimee}}</td>
+        <td>{{c.Signee}}</td>
+        <td>{{c.Date_confirm_frs}}</td>
+        <td>{{c.Date_rec_facture}}</td>
+        <td>{{c.Date_doc_transport}}</td>
+        <td>{{c.Date_embarquement}}</td>
+        <td>{{c.Date_prevue_arr_port}}</td>
+        <td>{{c.Date_avis_arrivee}}</td>
+        <td>{{c.Date_rec_site}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+      <!-- Pagination Controls -->
+      <div *ngIf="pageInfo && Cde.length > 0" class="pagination-controls">
+        <div class="pagination-buttons">
+          <button 
+            [disabled]="!pageInfo.hasPrevious"
+            (click)="onPageChange(currentPage - 1)"
+            class="page-btn prev-next"
+            aria-label="Previous page">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          
+          <ng-container *ngFor="let page of getVisiblePages()">
+            <button 
+              *ngIf="!isEllipsis(page)"
+              [class.active]="getPageNumber(page) === currentPage"
+              (click)="onPageChange(getPageNumber(page))"
+              class="page-btn">
+              {{getPageNumber(page) + 1}}
+            </button>
+            <span *ngIf="isEllipsis(page)" class="ellipsis" aria-hidden="true">...</span>
+          </ng-container>
+          
+          <button 
+            [disabled]="!pageInfo.hasNext"
+            (click)="onPageChange(currentPage + 1)"
+            class="page-btn prev-next"
+            aria-label="Next page">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

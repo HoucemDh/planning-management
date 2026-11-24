@@ -1,0 +1,98 @@
+<nav>
+  <a (click)="goBack()">
+    <i class='bx bxs-left-arrow-circle back'></i>
+  </a>
+  <img src="assets/hikma.png" width="90px">
+  <div class="search-container">
+    <input type="text" placeholder="Looking for something" [(ngModel)]="searchQuery"
+    (input)="onSearchInput($event)"
+    class="search-bar">
+    <button class="search-btn">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="table-container">
+    <div *ngIf="error" class="error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <p>{{ error }}</p>
+    </div>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">
+            {{ column }}
+            <i class="fas fa-filter filter-icon"
+               [class.active]="showFilter[column]"
+               (click)="toggleFilter(column, $event)"></i>
+            <div *ngIf="showFilter[column]" class="filter-container" (click)="$event.stopPropagation()">
+              <input [(ngModel)]="filters[column]" (input)="onFilterChange(column, $event)"
+                     class="filter-input" placeholder="Filter..." autocomplete="off"
+                     (click)="$event.stopPropagation()">
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="filteredGlobalStock.length === 0">
+          <td [attr.colspan]="columns.length" class="no-results">Aucun résultat n'est trouvé</td>
+        </tr>
+        <tr *ngFor="let g of filteredGlobalStock">
+          <td>{{ g.article }}</td>
+          <td>{{ g.designation }}</td>
+          <td>{{ g.categorie }}</td>
+          <td>{{ g.quantiteUS }}</td>
+          <td>{{ g.uniteStock }}</td>
+          <td>{{ g.quantiteActiveUS }}</td>
+          <td>{{ g.quantiteAllouee }}</td>
+          <td>{{ g.dateMVT }}</td>
+          <td>{{ g.lot }}</td>
+          <td>{{ g.sLot }}</td>
+          <td>{{ g.identifiant }}</td>
+          <td>{{ g.identifiant2 }}</td>
+          <td>{{ g.emplacement }}</td>
+          <td>{{ g.statut }}</td>
+          <td>{{ g.lotFournisseur }}</td>
+          <td>{{ g.datePeremption }}</td>
+          <td>{{ g.dateRecontrole }}</td>
+          <td>{{ g.demandeAnalyse }}</td>
+          <td>{{ g.quantiteUC }}</td>
+          <td>{{ g.coefUCUS }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div *ngIf="pageInfo && filteredGlobalStock.length > 0" class="pagination-controls">
+      <div class="pagination-buttons">
+        <button
+          [disabled]="!pageInfo.hasPrevious"
+          (click)="onPageChange(currentPage - 1)"
+          class="page-btn prev-next">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <ng-container *ngFor="let page of getVisiblePages()">
+          <button
+            *ngIf="!isEllipsis(page)"
+            [class.active]="getPageNumber(page) === currentPage"
+            (click)="onPageChange(getPageNumber(page))"
+            class="page-btn">
+            {{ getPageNumber(page) + 1 }}
+          </button>
+          <span *ngIf="isEllipsis(page)" class="ellipsis">...</span>
+        </ng-container>
+
+        <button
+          [disabled]="!pageInfo.hasNext"
+          (click)="onPageChange(currentPage + 1)"
+          class="page-btn prev-next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

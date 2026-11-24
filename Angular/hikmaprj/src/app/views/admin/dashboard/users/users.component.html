@@ -1,0 +1,109 @@
+<div class="main">
+  <nav>
+    <i class='bx bx-chevron-left back' (click)="navigateTo('/admin/dashboard')"></i>
+    <h2>Users List</h2>
+  </nav>
+
+  <!-- Success and error messages -->
+  <div class="message success" *ngIf="success">
+    <i class='bx bx-check-circle'></i>
+    <span>{{ success }}</span>
+    <i class='bx bx-x close' (click)="success = ''"></i>
+  </div>
+
+  <div class="message error" *ngIf="error">
+    <i class='bx bx-error-circle'></i>
+    <span>{{ error }}</span>
+    <i class='bx bx-x close' (click)="error = ''"></i>
+  </div>
+
+  <!-- Add user button -->
+  <a (click)="navigateTo('/admin/dashboard/userform')" class="nav-link">
+    <i class='bx bx-plus-medical bx-rotate-270 icon-card'></i>
+    <span class="link">Add New User</span>
+  </a>
+
+  <!-- Loading indicator -->
+  <div class="loading-container" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Loading users...</span>
+  </div>
+
+  <!-- Users table -->
+  <div class="table-container">
+    <table class="content-table" *ngIf="users.length > 0 && !loading">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Roles</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users" [class.inactive]="user.active === false">
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span class="role-badge" *ngFor="let role of user.roles; let last = last">
+              {{ role.name }}{{ !last ? ', ' : '' }}
+            </span>
+            <span *ngIf="!user.roles || user.roles.length === 0">No roles assigned</span>
+          </td>
+          <td>
+            <span class="status-badge" [class.active]="user.active !== false" [class.inactive]="user.active === false">
+              {{ user.active !== false ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td class="actions">
+            <button class="action-btn edit" title="Edit user" (click)="editUser(user.id)">
+              <i class='bx bx-edit'></i>
+            </button>
+
+            <!-- Show deactivate button for active users -->
+            <button *ngIf="user.active !== false"
+                    class="action-btn deactivate"
+                    title="Deactivate user"
+                    (click)="openModal('deactivate', user.id, user.username)">
+              <i class='bx bx-user-x'></i>
+            </button>
+
+            <!-- Show reactivate button for inactive users -->
+            <button *ngIf="user.active === false"
+                    class="action-btn reactivate"
+                    title="Reactivate user"
+                    (click)="openModal('reactivate', user.id, user.username)">
+              <i class='bx bx-user-check'></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="not-found-message" *ngIf="users.length === 0 && !loading">
+      <i class='bx bx-user-x'></i>
+      <p>No users available</p>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <app-modal
+    *ngIf="showModal"
+    [title]="modalAction === 'deactivate' ? 'Deactivate User' : 'Reactivate User'"
+    (close)="closeModal()">
+    <div class="modal-content">
+      <p>Are you sure you want to {{ modalAction }} user <strong>{{ selectedUsername }}</strong>?</p>
+      <div class="modal-actions">
+        <button class="btn cancel" (click)="closeModal()">Cancel</button>
+        <button
+          class="btn confirm"
+          [class.deactivate]="modalAction === 'deactivate'"
+          [class.reactivate]="modalAction === 'reactivate'"
+          (click)="confirmAction()">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </app-modal>
+</div>

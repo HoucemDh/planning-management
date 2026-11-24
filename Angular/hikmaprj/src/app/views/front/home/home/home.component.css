@@ -1,0 +1,181 @@
+/* Global Styles */
+.body {
+    min-height: 100vh;
+    background: #f8f9fa;
+    font-family: "Ubuntu", sans-serif;
+  }
+  
+  /* Header */
+  header {
+    background: #ffffff;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    color: #FF5C57;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .btn-log {
+    background: linear-gradient(135deg, #2a2185 0%, #1a224f 100%);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(42, 33, 133, 0.2);
+  }
+  
+  .btn-log:hover {
+    background: linear-gradient(135deg, #FF5C57 0%, #ff7b77 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px -1px rgba(255, 92, 87, 0.3);
+  }
+  
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    background: url('/assets/hikmafront.jpg') no-repeat center center/cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    text-align: center;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(43, 58, 103, 0.9) 0%, rgba(26, 34, 79, 0.9) 100%);
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hero h1 {
+    color: #ffffff;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+  
+  .hero h1 span {
+    color: #FF5C57;
+  }
+  
+  /* Footer */
+  .footer {
+    background: #ffffff;
+    padding: 60px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-section h3 {
+    color: #2a2185;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .footer-section ul li a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .footer-section ul li a:hover {
+    color: #FF5C57;
+    transform: translateX(5px);
+    display: inline-block;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    header {
+      padding: 20px;
+    }
+  
+    .hero {
+      padding: 60px 20px;
+    }
+  
+    .hero h1 {
+      font-size: 36px;
+    }
+  
+    .footer {
+      padding: 40px 20px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 30px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 24px;
+    }
+  
+    .btn-log {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  
+    .hero h1 {
+      font-size: 28px;
+    }
+  
+    .footer {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .footer-section ul li a:hover {
+      transform: none;
+    }
+  }

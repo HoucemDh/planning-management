@@ -1,0 +1,62 @@
+<div class="team-history-container">
+
+<div class="header">
+  <button class="back-button" (click)="goBack()">
+    Back
+  </button>
+  <h1 class="page-title">Team History</h1>
+
+</div>
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Loading audit logs...</p>
+  </div>
+
+  <!-- Table des logs -->
+  <div *ngIf="!loading" class="table-container">
+    <div class="table-wrapper">
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>User</th>
+            <th>Old Value</th>
+            <th>New Value</th>
+            <th>Modification Time</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr *ngFor="let log of paginatedLogs; let i = index" [class.even]="i % 2 === 0">
+            <td class="action-cell">
+              <span class="action-badge">{{ log.action }}</span>
+            </td>
+            <td class="username-cell">{{ log.username }}</td>
+            <td class="old-value-cell">
+              <span class="value-text">{{ log.oldValue || '-' }}</span>
+            </td>
+            <td class="new-value-cell">
+              <span class="value-text">{{ log.newValue || '-' }}</span>
+            </td>
+            <td class="timestamp-cell">{{ log.timestamp | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<div class="pagination-controls">
+  <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="currentPage = currentPage + 1" [disabled]="currentPage === totalPages">Next</button>
+</div>
+
+    <!-- Message si aucun log -->
+    <div *ngIf="auditLogs.length === 0" class="no-data">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p>No audit logs available</p>
+    </div>
+  </div>
+</div>

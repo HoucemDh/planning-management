@@ -1,0 +1,20 @@
+<div class="section-header">
+  <h2>Inventory Management</h2>
+  <div class="section-actions">
+
+  </div>
+</div>
+
+<!-- Cards -->
+<div class="card-grid">
+  <div class="modern-card" *ngFor="let module of modules" (click)="moduleNavigate(module.name)" [attr.data-module]="module.name">
+    <div class="card-icon-container">
+      <i class='bx {{ module.icon }}'></i>
+    </div>
+    <div class="card-content">
+      <h3>{{ module.title }}</h3>
+      <p>{{ module.description }}</p>
+    </div>
+   
+  </div>
+</div>

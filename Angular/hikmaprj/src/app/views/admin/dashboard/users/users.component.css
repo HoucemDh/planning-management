@@ -1,0 +1,406 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background: #f8f9fa;
+}
+
+/* Main Container Styles */
+.main {
+  padding: 30px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 80px);
+}
+
+/* Navigation Bar */
+nav {
+  height: 80px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  gap: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin-bottom: 24px;
+}
+
+nav .back {
+  font-size: 28px;
+  color: #2a2185;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+nav .back:hover {
+  color: #FF5C57;
+  transform: translateX(-3px);
+}
+
+nav h2 {
+  color: #2a2185;
+  font-weight: 600;
+}
+
+/* Router Link Styles */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: #ffffff;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #2a2185;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.nav-link:hover {
+  background: #2a2185;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(42, 33, 133, 0.2);
+  cursor: pointer;
+}
+
+.nav-link .icon-card {
+  font-size: 20px;
+  margin-right: 12px;
+}
+
+/* Table Container */
+.table-container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Table Styles */
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.content-table thead {
+  background: linear-gradient(135deg, #2a2185 0%, #1a224f 100%);
+  color: #ffffff;
+}
+
+.content-table th {
+  padding: 16px 24px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid rgba(42, 33, 133, 0.1);
+  transition: all 0.3s ease;
+}
+
+.content-table tbody tr:hover {
+  background: rgba(42, 33, 133, 0.02);
+}
+
+.content-table tbody tr.inactive {
+  background-color: rgba(255, 92, 87, 0.05);
+}
+
+.content-table tbody tr.inactive:hover {
+  background-color: rgba(255, 92, 87, 0.1);
+}
+
+.content-table td {
+  padding: 16px 24px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.active {
+  background-color: rgba(56, 176, 0, 0.1);
+  color: #38b000;
+}
+
+.status-badge.inactive {
+  background-color: rgba(255, 92, 87, 0.1);
+  color: #FF5C57;
+}
+
+/* Role Badge */
+.role-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: rgba(42, 33, 133, 0.1);
+  color: #2a2185;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn {
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.action-btn i {
+  font-size: 20px;
+}
+
+.action-btn.edit {
+  color: #2a2185;
+}
+
+.action-btn.edit:hover {
+  background: rgba(42, 33, 133, 0.1);
+  transform: translateY(-2px);
+}
+
+.action-btn.deactivate {
+  color: #FF5C57;
+}
+
+.action-btn.deactivate:hover {
+  background: rgba(255, 92, 87, 0.1);
+  transform: translateY(-2px);
+}
+
+.action-btn.reactivate {
+  color: #38b000;
+}
+
+.action-btn.reactivate:hover {
+  background: rgba(56, 176, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Message Styles */
+.message {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  animation: slideIn 0.3s ease;
+}
+
+.message i {
+  font-size: 20px;
+  margin-right: 12px;
+}
+
+.message .close {
+  margin-left: auto;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.message .close:hover {
+  opacity: 1;
+}
+
+.message.success {
+  background-color: rgba(56, 176, 0, 0.1);
+  border-left: 4px solid #38b000;
+  color: #38b000;
+}
+
+.message.error {
+  background-color: rgba(255, 92, 87, 0.1);
+  border-left: 4px solid #FF5C57;
+  color: #FF5C57;
+}
+
+/* Loading Styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(42, 33, 133, 0.1);
+  border-left-color: #2a2185;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+/* Modal Styles */
+.modal-content {
+  padding: 24px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn.cancel {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
+.btn.cancel:hover {
+  background-color: #e9ecef;
+}
+
+.btn.confirm {
+  color: white;
+}
+
+.btn.confirm.deactivate {
+  background-color: #FF5C57;
+}
+
+.btn.confirm.deactivate:hover {
+  background-color: #ff4338;
+}
+
+.btn.confirm.reactivate {
+  background-color: #38b000;
+}
+
+.btn.confirm.reactivate:hover {
+  background-color: #2d8c00;
+}
+
+/* Not Found Message */
+.not-found-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  color: #2a2185;
+  gap: 16px;
+}
+
+.not-found-message i {
+  font-size: 48px;
+  color: rgba(42, 33, 133, 0.2);
+}
+
+.not-found-message p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Animations */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main {
+    padding: 20px;
+  }
+
+  nav {
+    padding: 0 20px;
+    height: 70px;
+  }
+
+  .content-table th,
+  .content-table td {
+    padding: 12px 16px;
+  }
+
+  .nav-link {
+    padding: 10px 20px;
+  }
+
+  .message {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 15px;
+  }
+
+  nav {
+    padding: 0 15px;
+    height: 60px;
+  }
+
+  .nav-link {
+    padding: 8px 16px;
+  }
+
+  .content-table th,
+  .content-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .action-btn i {
+    font-size: 18px;
+  }
+
+  .message {
+    padding: 10px;
+    font-size: 13px;
+  }
+}

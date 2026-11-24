@@ -1,0 +1,108 @@
+<nav>
+  <a (click)="goBack()">
+    <i class='bx bxs-left-arrow-circle back'></i>
+  </a>
+  <img src="assets/hikma.png" width="90px">
+  <div class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchInput($event)"
+      placeholder="Looking for something..."
+      class="search-bar"
+      autocomplete="off">
+    <button class="search-btn">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="table-container">
+
+    <!-- Spinner de chargement -->
+    <div *ngIf="isLoading" class="loading-spinner-container">
+      <div class="loading-spinner"></div>
+      <p>Chargement des données...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Table shown when there are results -->
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns; let i = index"
+              [ngClass]="{ 'fixed-col': i < 8 }"
+              [style.left.px]="100 * i">
+            {{ column }}
+            <i class="fas fa-filter filter-icon"
+               [class.active]="showFilter[column]"
+               (click)="toggleFilter(column, $event)"></i>
+            <div *ngIf="showFilter[column]" class="filter-container" (click)="$event.stopPropagation()">
+              <input [(ngModel)]="filters[column]" (input)="onFilterChange(column, $event)"
+                     class="filter-input" placeholder="Filter..." autocomplete="off"
+                     (click)="$event.stopPropagation()">
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="filteredBomNData.length === 0">
+          <td [attr.colspan]="columns.length" class="no-results">Aucun résultat n'est trouvé</td>
+        </tr>
+        <tr *ngFor="let bomN of filteredBomNData">
+          <td class="fixed-col" [style.left.px]="100 * 0">{{ bomN.codeproduit }}</td>
+          <td class="fixed-col" [style.left.px]="100 * 1">{{ bomN.categorieProduit }}</td>
+          <td class="fixed-col" [style.left.px]="100 * 2">{{ bomN.libellesPf }}</td>
+          <td class="fixed-col" [style.left.px]="100 * 3">{{ bomN.taillelot }}</td>
+          <td class="fixed-col" [style.left.px]="100 * 4">{{ bomN.article }}</td>
+          <td class="fixed-col" [style.left.px]="100 * 5">{{ bomN.libellesMp }}</td>
+          <td class="fixed-col" [style.left.px]="100 * 6">{{ bomN.qteBesoin }}</td>
+          <td class="fixed-col" [style.left.px]="100 * 7">{{ bomN.unite }}</td>
+          <!-- Colonnes de Janvier à Décembre -->
+          <ng-container *ngFor="let month of months">
+            <td>{{ getResteLancer(bomN, month) }}</td>
+            <td>{{ getBesoinMpMois(bomN, month) }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div *ngIf="pageInfo && filteredBomNData.length > 0" class="pagination-controls">
+      <div class="pagination-buttons">
+        <button
+          [disabled]="!pageInfo.hasPrevious"
+          (click)="onPageChange(currentPage - 1)"
+          class="page-btn prev-next"
+          aria-label="Previous page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <ng-container *ngFor="let page of getVisiblePages()">
+          <button
+            *ngIf="!isEllipsis(page)"
+            [class.active]="getPageNumber(page) === currentPage"
+            (click)="onPageChange(getPageNumber(page))"
+            class="page-btn">
+            {{ getPageNumber(page) + 1 }}
+          </button>
+          <span *ngIf="isEllipsis(page)" class="ellipsis" aria-hidden="true">...</span>
+        </ng-container>
+
+        <button
+          [disabled]="!pageInfo.hasNext"
+          (click)="onPageChange(currentPage + 1)"
+          class="page-btn prev-next"
+          aria-label="Next page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

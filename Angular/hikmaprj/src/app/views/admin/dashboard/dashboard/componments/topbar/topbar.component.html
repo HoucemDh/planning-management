@@ -1,0 +1,24 @@
+<div class="topbar">
+  <div class="toggle" (click)="toggleMenu()">
+    <i class='bx bx-menu'></i>
+  </div>
+
+  <div class="topbar-actions">
+    <div class="user-info" (click)="toggleUserMenu()">
+      <div class="user-details">
+        <span class="user-name">{{ username }}</span>
+        <span class="user-role">{{ primaryRole }}</span>
+      </div>
+      <div class="user">
+        <img src="assets/avatar.png" alt="User Avatar" onerror="this.style.display='none'">
+      </div>
+      <div class="user-dropdown" *ngIf="showUserMenu">
+      <div class="user-dropdown-item" (click)="navigateTo('teamhistory')"*ngIf="authService.isAdmin()">
+              <i class='bx bx-user-circle'></i>
+              <span>Team history</span>
+            </div>
+
+      </div>
+    </div>
+  </div>
+</div>

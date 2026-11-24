@@ -1,0 +1,368 @@
+/* Main Container Styles */
+.main {
+  padding: 30px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 80px);
+  transition: all 0.3s ease;
+}
+
+/* Navigation Bar */
+nav {
+  height: 80px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  gap: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav .back {
+  font-size: 28px;
+  color: #2a2185;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+nav .back:hover {
+  color: #FF5C57;
+  transform: translateX(-3px);
+}
+
+/* Search Container */
+.search-container {
+  flex: 1;
+  display: flex;
+  max-width: 600px;
+  position: relative;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid rgba(42, 33, 133, 0.1);
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: rgba(42, 33, 133, 0.02);
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #2a2185;
+  background: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(42, 33, 133, 0.1);
+}
+
+.search-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #2a2185;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  color: #FF5C57;
+}
+
+/* Table Container */
+.table-container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Scrollbar Styles - Only Horizontal */
+.table-container::-webkit-scrollbar {
+  height: 12px;
+  width: 0;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: rgba(42, 33, 133, 0.2);
+  border-radius: 6px;
+  border: 3px solid #f1f1f1;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(42, 33, 133, 0.4);
+}
+
+/* Table Styles */
+.content-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.content-table th, .content-table td {
+  padding: 16px 24px;
+  text-align: center;
+  border: 1px solid #c0c0dd;
+}
+
+/* Table Header */
+.content-table th {
+  background-color: #2a2185;
+  color: #ffffff;
+  border: 1px solid #1d1762;
+}
+
+/* Column Styling for Months */
+.content-table th:nth-child(odd) {
+  background-color: #2a2185;
+  color: #ffffff;
+}
+
+.content-table th:nth-child(even) {
+  background-color: #e6e9f0;
+  color: #2a2185;
+}
+
+/* Cell Backgrounds */
+.content-table td:nth-child(odd) {
+  background-color: rgba(42, 33, 133, 0.05);
+}
+
+.content-table td:nth-child(even) {
+  background-color: rgba(230, 233, 240, 0.5);
+}
+
+/* Hover Effects on Header */
+.content-table th:hover {
+  background-color: #1d1762;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 20px;
+    gap: 16px;
+  }
+
+  .search-container {
+    max-width: none;
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  .content-table th,
+  .content-table td {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav img {
+    display: none;
+  }
+
+  .pagination-buttons {
+    gap: 4px;
+  }
+
+  .page-btn {
+    min-width: 32px;
+    height: 32px;
+  }
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: #ffffff;
+  border-top: 1px solid rgba(42, 33, 133, 0.1);
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  border: 2px solid rgba(42, 33, 133, 0.1);
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #2a2185;
+  font-weight: 500;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: #FF5C57;
+  color: #FF5C57;
+}
+
+.page-btn.active {
+  background: #2a2185;
+  border-color: #2a2185;
+  color: #ffffff;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.prev-next {
+  font-size: 12px;
+}
+
+.ellipsis {
+  color: #2a2185;
+  padding: 0 4px;
+}
+
+/* Loading Spinner */
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  height: 200px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(42, 33, 133, 0.1);
+  border-radius: 50%;
+  border-top-color: #2a2185;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.loading-spinner-container p {
+  color: #2a2185;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error and No Results Messages */
+.error-message, .no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+  text-align: center;
+}
+
+.error-message {
+  color: #FF5C57;
+}
+
+.no-results {
+  color: #666;
+  font-style: italic;
+}
+
+/* Sticky Columns */
+.fixed-col {
+  position: sticky;
+  z-index: 2;
+  background-color: white;
+}
+
+/* En-têtes des 7 premières colonnes - Bleu principal */
+.content-table th:nth-child(-n+8) {
+  background-color: #2a2185;
+  color: #ffffff;
+  border: 1px solid #1d1762;
+}
+
+/* Couleurs de fond bleues pour les cellules des 7 premières colonnes */
+.content-table td:nth-child(-n+8) {
+ background-color: rgba(230, 233, 240, 0.5);
+  border-right: 2px solid #ccc;
+}
+
+/* En-têtes des mois - Bleu (colonnes paires 11-12, 15-16, ...) */
+.content-table th:nth-child(11),
+.content-table th:nth-child(12),
+.content-table th:nth-child(15),
+.content-table th:nth-child(16),
+.content-table th:nth-child(19),
+.content-table th:nth-child(20),
+.content-table th:nth-child(23),
+.content-table th:nth-child(24),
+.content-table th:nth-child(27),
+.content-table th:nth-child(28),
+.content-table th:nth-child(31),
+.content-table th:nth-child(32),
+.content-table th:nth-child(35),
+.content-table th:nth-child(36),
+.content-table th:nth-child(39),
+.content-table th:nth-child(40),
+.content-table th:nth-child(43),
+.content-table th:nth-child(44),
+.content-table th:nth-child(47),
+.content-table th:nth-child(48) {
+  background-color: #2a2185;
+  color: #ffffff;
+}
+
+/* En-têtes des mois - Gris clair (colonnes impaires 9-10, 13-14, ...) */
+.content-table th:nth-child(9),
+.content-table th:nth-child(10),
+.content-table th:nth-child(13),
+.content-table th:nth-child(14),
+.content-table th:nth-child(17),
+.content-table th:nth-child(18),
+.content-table th:nth-child(21),
+.content-table th:nth-child(22),
+.content-table th:nth-child(25),
+.content-table th:nth-child(26),
+.content-table th:nth-child(29),
+.content-table th:nth-child(30),
+.content-table th:nth-child(33),
+.content-table th:nth-child(34),
+.content-table th:nth-child(37),
+.content-table th:nth-child(38),
+.content-table th:nth-child(41),
+.content-table th:nth-child(42),
+.content-table th:nth-child(45),
+.content-table th:nth-child(46) {
+  background-color: rgba(42, 33, 133, 0.15); /* Meilleure opacité */
+  color: #2a2185;
+}
+
+/* Colonnes restantes (après les 7 premières) - Fond clair */
+.content-table td:nth-child(n+8) {
+  background-color: rgba(230, 233, 240, 0.5);
+  border-right: 2px solid #ccc;
+
+}

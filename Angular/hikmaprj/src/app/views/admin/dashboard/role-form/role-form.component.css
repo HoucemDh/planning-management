@@ -1,0 +1,181 @@
+/* Modern Professional Form Styling */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.main {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+nav {
+  margin-bottom: 2rem;
+}
+
+.back {
+  font-size: 1.5rem;
+  color: #1f2937;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.15s ease-in-out;
+}
+
+.back:hover {
+  background-color: #f3f4f6;
+}
+
+h2 {
+  margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #1f2937;
+}
+
+.user-form, .role-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #1f2937;
+}
+
+.form-control {
+  padding: 0.625rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-control.is-invalid, .form-control.error {
+  border-color: #dc2626;
+}
+
+.invalid-feedback, .error-message {
+  color: #dc2626;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.alert-danger {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fee2e2;
+}
+
+.alert-success {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #dcfce7;
+}
+
+.role-checkboxes {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-check-input {
+  width: 1rem;
+  height: 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.form-check-label {
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn, .submit-btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  border: none;
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn:hover:not(:disabled), .submit-btn:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.btn:disabled, .submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.btn-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+.form-container {
+  margin-top: 1.5rem;
+}

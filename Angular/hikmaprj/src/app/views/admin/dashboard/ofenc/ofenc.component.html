@@ -1,0 +1,103 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<nav>
+  <a (click)="goBack()">
+    <i class='bx bxs-left-arrow-circle back'></i>
+  </a>
+  <img src="assets/hikma.png" width="90px">
+  <div class="search-container">
+    <input 
+      type="text" 
+      [(ngModel)]="searchQuery" 
+      (input)="onSearchInput($event)"
+      placeholder="Looking for something..." 
+      class="search-bar"
+      autocomplete="off">
+    <button class="search-btn">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</nav>
+<div class="main">  
+  <div class="table-container">
+
+       <!-- Error Message -->
+       <div *ngIf="error" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>{{ error }}</p>
+      </div>
+
+    <!-- Not found message -->
+    <div *ngIf="ofencData.length === 0" class="not-found-message">
+      <i class="fas fa-search"></i>
+      <p>No results found{{ searchQuery ? ' for "' + searchQuery + '"' : '' }}</p>
+    </div>
+
+    <!-- Table shown when there are results -->
+    <table class="content-table" *ngIf=" ofencData.length > 0">
+      <thead>
+        <tr>
+          <th>Num_Ordre</th>
+          <th>statut_Ordre</th>
+          <th>date_Creation</th>
+          <th>article</th>
+          <th>section</th>
+          <th>designation</th>
+          <th> designation2</th>
+          <th>lot</th>
+          <th>quantite_Lct</th>
+          <th>quantite_Restante</th>
+          <th>destination_OF</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of ofencData">
+          <td>{{h.numOrdre}}</td>
+          <td>{{h.statutOrdre}}</td>
+          <td>{{h.dateCreation}}</td>
+          <td>{{h.article}}</td>
+          <td>{{h.section}}</td>
+          <td>{{h.designation}}</td>
+          <td>{{h.designation2}}</td>
+          <td>{{h.lot}}</td>
+          <td>{{h.quantiteLct}}</td>
+          <td>{{h.quantiteRestante}}</td>
+          <td>{{h.destinationOF}}</td>
+         
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- Pagination Controls -->
+    <div *ngIf="pageInfo && ofencData.length > 0" class="pagination-controls">
+      <div class="pagination-buttons">
+        <button 
+          [disabled]="!pageInfo.hasPrevious"
+          (click)="onPageChange(currentPage - 1)"
+          class="page-btn prev-next"
+          aria-label="Previous page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <ng-container *ngFor="let page of getVisiblePages()">
+          <button 
+            *ngIf="!isEllipsis(page)"
+            [class.active]="getPageNumber(page) === currentPage"
+            (click)="onPageChange(getPageNumber(page))"
+            class="page-btn">
+            {{getPageNumber(page) + 1}}
+          </button>
+          <span *ngIf="isEllipsis(page)" class="ellipsis" aria-hidden="true">...</span>
+        </ng-container>
+        
+        <button 
+          [disabled]="!pageInfo.hasNext"
+          (click)="onPageChange(currentPage + 1)"
+          class="page-btn prev-next"
+          aria-label="Next page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

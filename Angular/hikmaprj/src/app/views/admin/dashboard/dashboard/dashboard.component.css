@@ -1,0 +1,66 @@
+/* dashboard.component.css */
+.body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Add styles for restricted access message */
+.restricted-access {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 2rem;
+}
+
+.restricted-access i {
+  font-size: 3rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.restricted-access p {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin: 0;
+}
+.main {
+  flex: 1;
+  transition: all 0.3s ease;
+  margin-left: 240px;
+  background-color: #f5f7fa;
+  overflow-y: auto;
+}
+
+.main.active {
+  margin-left: 70px;
+}
+
+.content-wrapper {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 70px;
+  }
+
+  .main.active {
+    margin-left: 0;
+  }
+}

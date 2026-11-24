@@ -1,0 +1,132 @@
+<nav>
+  <a (click)="goBack()">
+    <i class='bx bxs-left-arrow-circle back'></i>
+  </a>
+  <img src="assets/hikma.png" width="90px">
+  <div class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchInput($event)"
+      placeholder="Looking for something..."
+      class="search-bar"
+      autocomplete="off">
+    <button class="search-btn">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+  <button class="generate-btn" (click)="onCalculateFields()">Calculer tous les champs</button>
+
+  <!-- Popup de succès -->
+  <div *ngIf="showSuccessPopup" class="success-popup">
+    <div class="popup-content">
+      <span class="close-button" (click)="closeSuccessPopup()">&times;</span>
+      <div class="success-icon">✓</div>
+      <p>{{ successMessage }}</p>
+    </div>
+  </div>
+</nav>
+<div class="main">
+  <div class="table-container">
+    <!-- Error Message -->
+    <div *ngIf="error" class="error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Table shown when there are results -->
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">
+            {{ column }}
+            <i class="fas fa-filter filter-icon"
+               [class.active]="showFilter[column]"
+               (click)="toggleFilter(column, $event)"></i>
+            <div *ngIf="showFilter[column]" class="filter-container" (click)="$event.stopPropagation()">
+              <input [(ngModel)]="filters[column]" (input)="onFilterChange(column, $event)"
+                     class="filter-input" placeholder="Filter..." autocomplete="off"
+                     (click)="$event.stopPropagation()">
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="filteredCdeachatData.length === 0">
+          <td [attr.colspan]="columns.length" class="no-results">Aucun résultat n'est trouvé</td>
+        </tr>
+        <tr *ngFor="let h of filteredCdeachatData">
+          <td>{{h.noCommande}}</td>
+          <td>{{h.article}}</td>
+          <td>{{h.dateCommande}}</td>
+          <td>{{h.dateReceptPrevue}}</td>
+          <td>{{h.fournisseur}}</td>
+          <td>{{h.raisonSociale}}</td>
+          <td>{{h.designation}}</td>
+          <td>{{h.quantiteUa}}</td>
+          <td>{{h.quantiteUs}}</td>
+          <td>{{h.uniteAchat}}</td>
+          <td>{{h.resteLivrer}}</td>
+          <td>{{h.devise}}</td>
+          <td>{{h.prixBrut}}</td>
+          <td>{{h.montantLigne}}</td>
+          <td>{{h.pays}}</td>
+          <td>{{h.conditionPaiement}}</td>
+          <td>{{h.ligneSoldee}}</td>
+          <td>{{h.soldeReception}}</td>
+          <td>{{h.qteReceptUa}}</td>
+          <td>{{h.qteFactureUa}}</td>
+          <td>{{h.resteLivrerUs}}</td>
+          <td>{{h.modeLivraison}}</td>
+          <td>{{h.typeAchat}}</td>
+          <td>{{h.pieceOrigine}}</td>
+          <td>{{h.categorie}}</td>
+          <td>{{h.facturee}}</td>
+          <td>{{h.imprimee}}</td>
+          <td>{{h.signee}}</td>
+          <td>{{h.dateConfirmFrs}}</td>
+          <td>{{h.dateRecFacture}}</td>
+          <td>{{h.dateDocTransport}}</td>
+          <td>{{h.dateEmbarquement}}</td>
+          <td>{{h.datePrevueArrPort}}</td>
+          <td>{{h.dateAvisArrivee}}</td>
+          <td>{{h.dateRecSite}}</td>
+          <td>{{h.mois}}</td>
+          <td>{{h.dateCalcul}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div *ngIf="pageInfo && filteredCdeachatData.length > 0" class="pagination-controls">
+      <div class="pagination-buttons">
+        <button
+          [disabled]="!pageInfo.hasPrevious"
+          (click)="onPageChange(currentPage - 1)"
+          class="page-btn prev-next"
+          aria-label="Previous page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <ng-container *ngFor="let page of getVisiblePages()">
+          <button
+            *ngIf="!isEllipsis(page)"
+            [class.active]="getPageNumber(page) === currentPage"
+            (click)="onPageChange(getPageNumber(page))"
+            class="page-btn">
+            {{getPageNumber(page) + 1}}
+          </button>
+          <span *ngIf="isEllipsis(page)" class="ellipsis" aria-hidden="true">...</span>
+        </ng-container>
+
+        <button
+          [disabled]="!pageInfo.hasNext"
+          (click)="onPageChange(currentPage + 1)"
+          class="page-btn prev-next"
+          aria-label="Next page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

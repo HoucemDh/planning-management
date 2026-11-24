@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <nav>
+      <a (click)="goBack()">
+        <i class='bx bxs-left-arrow-circle back'></i>
+      </a>
+      <img src="assets/hikma.png" width="90px">
+      <div class="search-container">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="onSearchInput($event)"
+          placeholder="Looking for something..."
+          class="search-bar"
+          autocomplete="off">
+        <button class="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <div class="controls-container">
+        <button
+          (click)="toggleFilter()"
+          [class.active]="filterNegative"
+          class="filter-btn">
+          <i class="fas fa-filter"></i>
+          {{ filterNegative ? 'Show All' : 'Show Negative' }}
+        </button>
+        <button
+          (click)="generateRotation()"
+          [disabled]="isGenerating"
+          class="generate-btn">
+          <i class="fas fa-sync-alt" [class.fa-spin]="isGenerating"></i>
+          {{ isGenerating ? 'Generating...' : 'Update' }}
+        </button>
+        <div class="last-update">
+          Last Update: {{ formatDate(lastUpdateTime) }}
+        </div>
+      </div>
+    </nav>
+    <div class="main">
+      <div class="table-container">
+ <!-- Error Message -->
+ <div *ngIf="error" class="error-message">
+  <i class="fas fa-exclamation-circle"></i>
+  <p>{{ error }}</p>
+</div>
+
+<!-- Not found message -->
+      <div *ngIf="rotatioMp.length === 0" class="not-found-message">
+      <i class="fas fa-search"></i>
+      <p>No results found{{ searchQuery ? ' for "' + searchQuery + '"' : '' }}</p>
+      </div>
+
+        <table class="content-table" *ngIf="rotatioMp.length > 0">
+          <thead>
+            <tr>
+              <th>Article</th>
+              <th>Designation</th>
+              <th>Dispo_OF</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of rotatioMp">
+              <td>{{r.article}}</td>
+              <td>{{r.designation}}</td>
+              <td [class.negative]="r.dispoof < 0">{{r.dispoof}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="pageInfo && rotatioMp.length > 0" class="pagination-controls">
+          <div class="pagination-buttons">
+            <button
+              [disabled]="!pageInfo.hasPrevious"
+              (click)="onPageChange(currentPage - 1)"
+              class="page-btn prev-next"
+              aria-label="Previous page">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <ng-container *ngFor="let page of getVisiblePages()">
+              <button
+                *ngIf="!isEllipsis(page)"
+                [class.active]="getPageNumber(page) === currentPage"
+                (click)="onPageChange(getPageNumber(page))"
+                class="page-btn">
+                {{getPageNumber(page) + 1}}
+              </button>
+              <span *ngIf="isEllipsis(page)" class="ellipsis" aria-hidden="true">...</span>
+            </ng-container>
+
+            <button
+              [disabled]="!pageInfo.hasNext"
+              (click)="onPageChange(currentPage + 1)"
+              class="page-btn prev-next"
+              aria-label="Next page">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>

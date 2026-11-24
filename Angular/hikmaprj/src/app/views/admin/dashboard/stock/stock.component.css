@@ -1,0 +1,577 @@
+/* Main Container Styles */
+.main {
+  padding: 30px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 80px);
+}
+
+/* Navigation Bar */
+nav {
+  height: 80px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  gap: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav .back {
+  font-size: 28px;
+  color: #2a2185;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+nav .back:hover {
+  color: #FF5C57;
+  transform: translateX(-3px);
+}
+
+/* Search Container */
+.search-container {
+  flex: 1;
+  display: flex;
+  max-width: 600px;
+  position: relative;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid rgba(42, 33, 133, 0.1);
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: rgba(42, 33, 133, 0.02);
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #2a2185;
+  background: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(42, 33, 133, 0.1);
+}
+
+.search-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #2a2185;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  color: #FF5C57;
+}
+
+/* Table Container & Scrollbar Styles */
+.table-container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+  overflow-x: auto;
+}
+
+.table-container::-webkit-scrollbar {
+  height: 12px;
+  width: 0;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: rgba(42, 33, 133, 0.2);
+  border-radius: 6px;
+  border: 3px solid #f1f1f1;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(42, 33, 133, 0.4);
+}
+
+/* Not Found Message */
+.not-found-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  color: #2a2185;
+  gap: 16px;
+}
+
+.not-found-message i {
+  font-size: 48px;
+  color: rgba(42, 33, 133, 0.2);
+}
+
+.not-found-message p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Table Styles */
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1600px;
+}
+
+.content-table thead {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: #ffffff;
+}
+
+.content-table th {
+  padding: 16px 24px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  border-right: 1px solid #c5cae9;
+  transition: background-color 0.3s ease;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid rgba(42, 33, 133, 0.1);
+  transition: all 0.3s ease;
+}
+
+.content-table tbody tr:hover {
+  background: rgba(63, 81, 181, 0.05);
+}
+
+.content-table td {
+  padding: 16px 24px;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+  border-right: 1px solid #c5cae9;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Dark and Light Column Styles */
+.dark-column {
+  background-color: #1a237e !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.light-column {
+  background-color: #e8eaf6 !important;
+  color: #283593 !important;
+}
+
+.content-table th.dark-column,
+.content-table td.dark-column {
+  border-right: 1px solid #3f51b5;
+}
+
+.content-table td.dark-column:hover {
+  background-color: #283593 !important;
+}
+
+.content-table td.light-column:hover {
+  background-color: #c5cae9 !important;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: #ffffff;
+  border-top: 1px solid rgba(42, 33, 133, 0.1);
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  border: 2px solid rgba(42, 33, 133, 0.1);
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #2a2185;
+  font-weight: 500;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: #FF5C57;
+  color: #FF5C57;
+}
+
+.page-btn.active {
+  background: #2a2185;
+  border-color: #2a2185;
+  color: #ffffff;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.prev-next {
+  font-size: 12px;
+}
+
+.ellipsis {
+  color: #2a2185;
+  padding: 0 4px;
+}
+
+.separator {
+  width: 10px;
+  background: #e0e0e0;
+  border-left: 2px solid #d1d1d1;
+}
+
+/* Animation d'entrée améliorée */
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Styles des inputs et selects */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: #f9fafb;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2a2185;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(42, 33, 133, 0.1);
+}
+
+.form-group input:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+  color: #6b7280;
+}
+
+.form-group input[readonly] {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+/* Animation de chargement pour le bouton */
+.submit-btn.loading {
+  position: relative;
+  color: transparent;
+}
+
+.submit-btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+/* Pour les écrans jusqu'à 640px */
+@media (max-width: 640px) {
+  .popup {
+    padding: 16px;
+  }
+  .popup-content {
+    max-width: none;
+    border-radius: 16px;
+  }
+  .popup-header {
+    padding: 20px 24px;
+  }
+  .form-container {
+    padding: 24px;
+  }
+  .form-group input,
+  .form-group select {
+    padding: 12px 14px;
+  }
+}
+
+/* Pour les écrans jusqu'à 768px */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 20px;
+    gap: 16px;
+  }
+  .search-container {
+    max-width: none;
+  }
+  .main {
+    padding: 20px;
+  }
+  .content-table th,
+  .content-table td {
+    padding: 12px 16px;
+  }
+  .year-selector {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+  .year-scroll button {
+    padding: 6px 16px;
+    font-size: 14px;
+    min-width: 80px;
+  }
+  .year-nav {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Pour les écrans jusqu'à 480px */
+@media (max-width: 480px) {
+  nav img {
+    display: none;
+  }
+  .pagination-buttons {
+    gap: 4px;
+  }
+  .page-btn {
+    min-width: 32px;
+    height: 32px;
+  }
+  .content-table {
+    width: max-content;
+    border-collapse: collapse;
+    position: relative;
+  }
+  .content-table th,
+  .content-table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+  }
+  .content-table thead th {
+    background-color: #f4f4f4;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .content-table tbody td {
+    background-color: #fff;
+  }
+  .content-table th:nth-child(1),
+  .content-table td:nth-child(1),
+  .content-table th:nth-child(2),
+  .content-table td:nth-child(2),
+  .content-table th:nth-child(3),
+  .content-table td:nth-child(3) {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  .content-table th:nth-child(2),
+  .content-table td:nth-child(2) {
+    left: 80px;
+  }
+  .content-table th:nth-child(3),
+  .content-table td:nth-child(3) {
+    left: 160px;
+  }
+}
+
+/* Colonnes fixes */
+.sticky-column {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.content-table th:nth-child(1),
+.content-table td:nth-child(1),
+.content-table th:nth-child(2),
+.content-table td:nth-child(2),
+.content-table th:nth-child(3),
+.content-table td:nth-child(3) {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #1a237e;
+  color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.content-table th:nth-child(2),
+.content-table td:nth-child(2) {
+  left: 80px;
+}
+
+.content-table th:nth-child(3),
+.content-table td:nth-child(3) {
+  left: 160px;
+}
+
+/* Bouton Actualiser */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 2s linear infinite;
+}
+
+/* Classe pour afficher les valeurs négatives en rouge */
+.content-table td.negative {
+  background-color: rgba(255, 0, 0, 0.2) !important;
+  /* Vous pouvez aussi éventuellement modifier la couleur du texte si besoin */
+  color: #333;
+}
+.update-btn {
+  background-color: #FF5C57; /* Couleur de fond de base */
+  color: white;              /* Texte en blanc */
+  border: none;              /* Pas de bordure */
+  padding: 10px 20px;        /* Espacement interne */
+  text-align: center;        /* Centrer le texte */
+  text-decoration: none;     /* Supprimer la décoration de texte */
+  display: inline-block;     /* Pour que le bouton soit un élément en ligne */
+  font-size: 16px;           /* Taille de la police */
+  cursor: pointer;          /* Curseur de la souris en forme de main */
+  border-radius: 5px;        /* Coins arrondis */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Effet de transition */
+}
+
+.update-btn:hover {
+  background-color: #e14b45; /* Changement de couleur au survol (plus foncé) */
+  transform: scale(1.05);     /* Légère augmentation de la taille au survol */
+}
+
+.update-btn:active {
+  background-color: #d13a32; /* Couleur plus sombre au clic */
+  transform: scale(0.98);     /* Réduction au clic */
+}
+
+.update-btn:focus {
+  outline: none;             /* Supprimer le contour lors du focus */
+  box-shadow: 0 0 10px rgba(255, 92, 87, 0.8); /* Ombre au focus avec la couleur de base */
+}
+
+.update-btn:disabled {
+  background-color: #cccccc;  /* Couleur de fond grise pour le bouton désactivé */
+  cursor: not-allowed;        /* Curseur non-cliquable */
+  opacity: 0.6;               /* Réduire l'opacité pour indiquer que le bouton est désactivé */
+}
+
+
+
+
+.actualiser-btn {
+  background-color: #2a2185; /* Couleur de fond violet */
+  color: white;              /* Texte en blanc */
+  padding: 10px 20px;        /* Espacement interne */
+  text-align: center;        /* Centrer le texte */
+  border: none;              /* Pas de bordure */
+  display: inline-flex;      /* Pour que le bouton soit un élément en ligne avec flex */
+  align-items: center;       /* Centrer le contenu verticalement */
+  justify-content: center;   /* Centrer le contenu horizontalement */
+  gap: 8px;                  /* Espacement entre l'icône et le texte */
+  font-size: 16px;           /* Taille de la police */
+  border-radius: 5px;        /* Coins arrondis */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transition fluide */
+}
+
+.actualiser-btn:hover {
+  background-color: #1a224f; /* Couleur de fond bleu foncé au survol */
+}
+
+.actualiser-btn:focus {
+  outline: none;             /* Supprimer le contour lors du focus */
+  box-shadow: 0 0 10px rgba(42, 33, 133, 0.8); /* Ombre au focus */
+}
+
+.actualiser-btn:active {
+  transform: scale(0.95);     /* Réduction au clic */
+}
+
+.actualiser-btn:disabled {
+  background-color: #cccccc;  /* Couleur de fond grise pour le bouton désactivé */
+  cursor: not-allowed;        /* Curseur non-cliquable */
+  opacity: 0.6;               /* Réduire l'opacité pour indiquer que le bouton est désactivé */
+}
+
+.export-button {
+  background-color: #198754; /* Vert Bootstrap */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.export-button:hover {
+  background-color: #157347; /* Un peu plus foncé au survol */
+  transform: scale(1.03);
+}
+
+.export-button:active {
+  background-color: #14532d; /* Encore plus foncé lors du clic */
+  transform: scale(0.98);
+}
+
+.export-button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}

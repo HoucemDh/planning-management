@@ -1,0 +1,129 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<nav>
+  <a (click)="goBack()">
+    <i class='bx bxs-left-arrow-circle back'></i>
+  </a>
+  <img src="assets/hikma.png" width="90px">
+  <div class="search-container">
+    <input 
+      type="text" 
+      [(ngModel)]="searchQuery"
+      (input)="onSearchInput($event)"
+      placeholder="Looking for something..." 
+      class="search-bar"
+      autocomplete="off">
+    <button class="search-btn">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</nav>
+<div class="main">  
+  <div class="table-container">
+
+       <!-- Error Message -->
+       <div *ngIf="error" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>{{ error }}</p>
+      </div>
+
+    <!-- Not found message -->
+    <div *ngIf="mvstData.length === 0" class="not-found-message">
+      <i class="fas fa-search"></i>
+      <p>No results found{{ searchQuery ? ' for "' + searchQuery + '"' : '' }}</p>
+    </div>
+
+    <!-- Table shown when there are results -->
+    <table class="content-table" *ngIf=" mvstData.length > 0">
+      <thead>
+        <tr>
+          <th>Article</th>
+          <th>Designation</th>
+          <th>Date_imputation</th>
+          <th>Quantite_US</th>
+          <th>Unite_stock</th>
+          <th>Quantite</th>
+          <th>Unite</th>
+          <th>Statut</th>
+          <th>Lot</th>
+          <th>S_lot</th>
+          <th>Identifiant1</th>
+          <th>Identifiant2</th>
+          <th>Lot_fournisseur</th>
+          <th>Emplacement</th>
+          <th>Type_transaction</th>
+          <th>Tiers</th>
+          <th>Type_piece</th>
+          <th>Piece</th>
+          <th>Piece_origine</th>
+          <th>No_ligne_piece</th>
+          <th>Date_creation</th>
+          <th>Operateur_creation</th>
+          <th>Date_peremption</th>
+          <th>DLU</th>
+          <th>Affaire</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of mvstData">
+          <td>{{h.article}}</td>
+          <td>{{h.designation}}</td>
+          <td>{{h.Date_imputation}}</td>
+          <td>{{h.Quantite_US}}</td>
+          <td>{{h.Unite_stock}}</td>
+          <td>{{h.Quantite}}</td>
+          <td>{{h.Unite}}</td>
+          <td>{{h.statut}}</td>
+          <td>{{h.Lot}}</td>
+          <td>{{h.S_lot}}</td>
+          <td>{{h.Identifiant1}}</td>
+          <td>{{h.Identifiant2}}</td>
+          <td>{{h.Lot_fournisseur}}</td>
+          <td>{{h.Emplacement}}</td>
+          <td>{{h.Type_transaction}}</td>
+          <td>{{h.Tiers}}</td>
+          <td>{{h.Type_piece}}</td>
+          <td>{{h.Piece}}</td>
+          <td>{{h.Piece_origine}}</td>
+          <td>{{h.No_ligne_piece}}</td>
+          <td>{{h.Date_creation}}</td>
+          <td>{{h.Operateur_creation}}</td>
+          <td>{{h.Date_peremption}}</td>
+          <td>{{h.DLU}}</td>
+          <td>{{h.Affaire}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- Pagination Controls -->
+    <div *ngIf="pageInfo && mvstData.length > 0" class="pagination-controls">
+      <div class="pagination-buttons">
+        <button 
+          [disabled]="!pageInfo.hasPrevious"
+          (click)="onPageChange(currentPage - 1)"
+          class="page-btn prev-next"
+          aria-label="Previous page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <ng-container *ngFor="let page of getVisiblePages()">
+          <button 
+            *ngIf="!isEllipsis(page)"
+            [class.active]="getPageNumber(page) === currentPage"
+            (click)="onPageChange(getPageNumber(page))"
+            class="page-btn">
+            {{getPageNumber(page) + 1}}
+          </button>
+          <span *ngIf="isEllipsis(page)" class="ellipsis" aria-hidden="true">...</span>
+        </ng-container>
+        
+        <button 
+          [disabled]="!pageInfo.hasNext"
+          (click)="onPageChange(currentPage + 1)"
+          class="page-btn prev-next"
+          aria-label="Next page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

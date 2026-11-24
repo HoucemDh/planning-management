@@ -1,0 +1,13 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-container" (click)="preventClose($event)">
+      <div class="modal-header">
+        <h3>{{ title }}</h3>
+        <button class="close-btn" (click)="closeModal()">
+          <i class='bx bx-x'></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>

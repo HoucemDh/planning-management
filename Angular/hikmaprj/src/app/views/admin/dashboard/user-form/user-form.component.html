@@ -1,0 +1,93 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Edit User' : 'Create New User' }}</h2>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="success" class="alert alert-success">
+    {{ success }}
+  </div>
+
+  <!-- Loading indicator -->
+  <div class="loading-container" *ngIf="loading">
+    <div class="spinner"></div>
+    <span>Loading...</span>
+  </div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form" *ngIf="!loading">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        class="form-control"
+        [class.is-invalid]="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+      <div class="invalid-feedback" *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+        <div *ngIf="userForm.get('username')?.errors?.['required']">Username is required</div>
+        <div *ngIf="userForm.get('username')?.errors?.['minlength']">Username must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control"
+        [class.is-invalid]="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        <div *ngIf="userForm.get('email')?.errors?.['required']">Email is required</div>
+        <div *ngIf="userForm.get('email')?.errors?.['email']">Please enter a valid email address</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">
+        Password
+        <span *ngIf="!isEditMode" class="required-indicator">*</span>
+        <span *ngIf="isEditMode" class="optional-text"></span>
+      </label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+        [class.is-invalid]="userForm.get('password')?.invalid && userForm.get('password')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+        <div *ngIf="userForm.get('password')?.errors?.['required']">Password is required</div>
+        <div *ngIf="userForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Roles</label>
+      <div class="role-checkboxes">
+        <div *ngFor="let role of roles" class="form-check">
+          <input
+            type="checkbox"
+            [id]="'role-' + role.id"
+            [value]="role.id"
+            [checked]="isRoleSelected(role.id)"
+            (change)="onRoleChange($event, role.id)"
+            class="form-check-input"
+          >
+          <label [for]="'role-' + role.id" class="form-check-label">
+            {{ role.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
+        {{ isEditMode ? 'Update User' : 'Create User' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
+    </div>
+  </form>
+</div>

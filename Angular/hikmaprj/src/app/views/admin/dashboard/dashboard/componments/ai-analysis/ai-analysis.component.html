@@ -1,0 +1,91 @@
+
+<div class="section-header">
+  <h2>AI Analysis Tool</h2>
+</div>
+
+<div class="ai-analysis-container" *ngIf="authService.isAdmin() || authService.isPlanner()">
+
+
+  <div class="ai-prompt-section">
+    <h3>Generate Inventory Analysis</h3>
+    <div class="ai-input-group">
+      <input
+        type="text"
+        placeholder="Enter Designation (e.g., 'Item A')"
+        [(ngModel)]="designationInput"
+        class="ai-prompt-input"
+      />
+      <button class="ai-submit-btn" (click)="generateAiAnalysis()">
+        <i class="bx bx-send"></i> Generate
+      </button>
+    </div>
+  </div>
+
+  <!-- Indicateur de chargement -->
+  <div class="ai-results-section" *ngIf="loading">
+    <div class="ai-loading">
+      <i class="bx bx-loader-alt bx-spin"></i>
+      <p>Generating analysis...</p>
+    </div>
+  </div>
+
+  <!-- Affichage d'erreur -->
+  <div class="ai-results-section" *ngIf="errorMessage && !loading">
+    <div class="ai-error">
+      <i class="bx bx-error-circle"></i>
+      <p>{{ errorMessage }}</p>
+    </div>
+    <div class="ai-debug-info">
+      <p>Assurez-vous que:</p>
+      <ul>
+        <li>Le service backend est en cours d'exécution</li>
+        <li>Le schéma GraphQL contient bien la requête 'shareAnalysisByEmail'</li>
+        <li>La désignation et l’e‑mail fournis sont valides</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Résultats et actions -->
+  <div class="ai-results-section" *ngIf="analysisResult && !loading">
+    <div class="ai-results-header">
+      <h3>Analysis Results</h3>
+      <div class="ai-results-actions">
+        <!-- Export PDF -->
+        <button class="action-btn small" (click)="exportResults()">
+          <i class="bx bx-export"></i> Export
+        </button>
+      </div>
+    </div>
+    <div class="ai-results-content">
+      <p><strong>Analysis:</strong> {{ analysisResult.analysis }}</p>
+      <p><strong>Recommended Action:</strong> {{ analysisResult.recommendedAction }}</p>
+    </div>
+
+    <!-- Section de partage par mail -->
+    <div class="share-section">
+      <input
+        type="email"
+        placeholder="Adresse e‑mail du destinataire"
+        [(ngModel)]="shareEmail"
+        class="ai-prompt-input"
+      />
+      <button
+        class="action-btn small secondary"
+        [disabled]="!shareEmail || sharing"
+        (click)="onShareClick()"
+      >
+        <i class="bx bx-share"></i>
+        {{ sharing ? 'Envoi…' : 'Envoyer par mail' }}
+      </button>
+
+      <!-- Message de succès ou d'erreur -->
+      <p class="success" *ngIf="shareSuccess">
+        Mail envoyé avec succès 📧
+      </p>
+      <p class="error" *ngIf="shareError">
+        {{ shareError }}
+      </p>
+    </div>
+  </div>
+</div>
+

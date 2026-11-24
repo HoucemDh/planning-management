@@ -1,0 +1,40 @@
+.welcome-container {
+  height: 100vh;
+  background: linear-gradient(135deg, #2a2185, #FF5C57);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.welcome-box {
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 700px;
+}
+
+.welcome-box .title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2a2185;
+}
+
+.welcome-box .title span {
+  color: #FF5C57;
+}
+
+.welcome-box .subtitle {
+  font-size: 1.5rem;
+  margin: 20px 0;
+  color: #444;
+}
+
+.welcome-box .date {
+  font-size: 1.1rem;
+  color: #2a2185;
+  margin-top: 20px;
+  font-weight: 500;
+}

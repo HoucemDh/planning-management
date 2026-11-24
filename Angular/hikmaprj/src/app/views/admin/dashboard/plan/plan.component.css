@@ -1,0 +1,1082 @@
+/* Main Container Styles */
+.main {
+  padding: 30px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 80px);
+}
+
+/* Navigation Bar */
+nav {
+  height: 80px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  gap: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav .back {
+  font-size: 28px;
+  color: #2a2185;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+nav .back:hover {
+  color: #FF5C57;
+  transform: translateX(-3px);
+}
+
+/* Search Container */
+.search-container {
+  flex: 1;
+  display: flex;
+  max-width: 600px;
+  position: relative;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid rgba(42, 33, 133, 0.1);
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: rgba(42, 33, 133, 0.02);
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #2a2185;
+  background: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(42, 33, 133, 0.1);
+}
+
+.search-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #2a2185;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  color: #FF5C57;
+}
+/*pagination */
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pagination button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Table Container */
+.table-container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+  overflow-x: auto;
+}
+
+/* Scrollbar Styles - Only Horizontal */
+.table-container::-webkit-scrollbar {
+  height: 12px;
+  width: 0;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: rgba(42, 33, 133, 0.2);
+  border-radius: 6px;
+  border: 3px solid #f1f1f1;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(42, 33, 133, 0.4);
+}
+
+/* Not Found Message */
+.not-found-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  color: #2a2185;
+  gap: 16px;
+}
+
+.not-found-message i {
+  font-size: 48px;
+  color: rgba(42, 33, 133, 0.2);
+}
+
+.not-found-message p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Table Styles */
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1600px;
+}
+
+.content-table thead {
+  background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+  color: #ffffff;
+}
+
+.content-table th {
+  padding: 16px 24px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  border-right: 1px solid #c5cae9;
+  transition: background-color 0.3s ease;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid rgba(42, 33, 133, 0.1);
+  transition: all 0.3s ease;
+}
+
+.content-table tbody tr:hover {
+  background: rgba(63, 81, 181, 0.05);
+}
+
+.content-table td {
+  padding: 16px 24px;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+  border-right: 1px solid #c5cae9;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Dark and Light Column Styles */
+.dark-column {
+  background-color: #1a237e !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.light-column {
+  background-color: #e8eaf6 !important;
+  color: #283593 !important;
+}
+
+.content-table th.dark-column,
+.content-table td.dark-column {
+  border-right: 1px solid #3f51b5;
+}
+
+.content-table td.dark-column:hover {
+  background-color: #283593 !important;
+}
+
+.content-table td.light-column:hover {
+  background-color: #c5cae9 !important;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: #ffffff;
+  border-top: 1px solid rgba(42, 33, 133, 0.1);
+}
+
+.pagination-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  border: 2px solid rgba(42, 33, 133, 0.1);
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #2a2185;
+  font-weight: 500;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: #FF5C57;
+  color: #FF5C57;
+}
+
+.page-btn.active {
+  background: #2a2185;
+  border-color: #2a2185;
+  color: #ffffff;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.prev-next {
+  font-size: 12px;
+}
+
+.ellipsis {
+  color: #2a2185;
+  padding: 0 4px;
+}
+
+/* Floating Action Button Styles */
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.separator {
+  width: 10px;
+  background: #e0e0e0;
+  border-left: 2px solid #d1d1d1;
+}
+
+
+/* Styles de la popup */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.popup-content {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: modalSlideUp 0.4s ease-out;
+  overflow: hidden;
+}
+
+/* Animation d'entrée améliorée */
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* En-tête du popup */
+.popup-header {
+  background: linear-gradient(135deg, #2a2185 0%, #1a224f 100%);
+  padding: 24px 32px;
+  border-bottom: none;
+}
+
+.popup-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.popup-header h2::before {
+  content: '+';
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* Conteneur du formulaire */
+.form-container {
+  padding: 32px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+/* Groupes de formulaire */
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.form-group label i {
+  color: #2a2185;
+}
+
+/* Styles des inputs et selects */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: #f9fafb;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2a2185;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(42, 33, 133, 0.1);
+}
+
+.form-group input:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+  color: #6b7280;
+}
+
+/* Style spécial pour les champs en lecture seule */
+.form-group input[readonly] {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+/* Bouton de soumission */
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #2a2185 0%, #1a224f 100%);
+  color: white;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(42, 33, 133, 0.2);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Animation de chargement pour le bouton */
+.submit-btn.loading {
+  position: relative;
+  color: transparent;
+}
+
+.submit-btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Styles responsifs */
+@media (max-width: 640px) {
+  .popup {
+    padding: 16px;
+  }
+
+  .popup-content {
+    max-width: none;
+    border-radius: 16px;
+  }
+
+  .popup-header {
+    padding: 20px 24px;
+  }
+
+  .form-container {
+    padding: 24px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 12px 14px;
+  }
+}
+
+/* Validation visuelle */
+.form-group.error input,
+.form-group.error select {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.form-group.error .error-message {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-group.success input,
+.form-group.success select {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 20px;
+    gap: 16px;
+  }
+
+  .search-container {
+    max-width: none;
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  .content-table th,
+  .content-table td {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav img {
+    display: none;
+  }
+
+  .pagination-buttons {
+    gap: 4px;
+  }
+
+  .page-btn {
+    min-width: 32px;
+    height: 32px;
+  }
+
+  .content-table {
+    width: max-content; /* Permet d’avoir une largeur ajustable */
+    border-collapse: collapse;
+    position: relative;
+  }
+
+  .content-table th, .content-table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+  }
+
+  .content-table thead th {
+    background-color: #f4f4f4;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .content-table tbody td {
+    background-color: #fff;
+  }
+
+  .content-table th:nth-child(1),
+  .content-table td:nth-child(1),
+  .content-table th:nth-child(2),
+  .content-table td:nth-child(2),
+  .content-table th:nth-child(3),
+  .content-table td:nth-child(3) {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: white; /* Assure que le fond reste visible */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .content-table th:nth-child(2),
+  .content-table td:nth-child(2) {
+    left: 80px; /* Ajuste en fonction de la largeur de la première colonne */
+  }
+
+  .content-table th:nth-child(3),
+  .content-table td:nth-child(3) {
+    left: 160px; /* Ajuste en fonction de la largeur des deux premières colonnes */
+  }
+}
+
+/* Nouvelle classe pour les colonnes fixes */
+.sticky-column {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Appliquer la classe aux colonnes spécifiques */
+.content-table th:nth-child(1),
+.content-table td:nth-child(1),
+.content-table th:nth-child(2),
+.content-table td:nth-child(2),
+.content-table th:nth-child(3),
+.content-table td:nth-child(3) {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #1a237e; /* Fond distinct pour les en-têtes fixes */
+  color: white; /* Texte blanc pour contraster avec le fond */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.content-table th:nth-child(2),
+.content-table td:nth-child(2) {
+  left: 80px; /* Ajuste en fonction de la largeur de la première colonne */
+}
+
+.content-table th:nth-child(3),
+.content-table td:nth-child(3) {
+  left: 160px; /* Ajuste en fonction de la largeur des deux premières colonnes */
+}
+/* Year Selector Container */
+.year-selector {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.year-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* Masquer la scrollbar par défaut tout en gardant la fonctionnalité */
+.year-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.year-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Custom Scrollbar Container */
+.year-selector::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 12px;
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+}
+
+/* Custom Scrollbar Thumb */
+.year-scroll::after {
+  content: '';
+  position: absolute;
+  height: 4px;
+  bottom: -8px;
+  left: 0;
+  width: var(--scroll-width, 20%);
+  background: #2a2185;
+  border-radius: 2px;
+  transform: translateX(var(--scroll-left, 0));
+  transition: transform 0.1s ease-out;
+  z-index: 1;
+}
+
+/* Year Button Styles */
+.year-scroll button {
+  padding: 8px 24px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  min-width: 100px;
+  position: relative;
+}
+
+.year-scroll button:hover {
+  color: #2a2185;
+  background: rgba(42, 33, 133, 0.05);
+}
+
+.year-scroll button.active {
+  color: #2a2185;
+  border-color: #2a2185;
+  background: rgba(42, 33, 133, 0.1);
+}
+
+/* Navigation Arrows */
+.year-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #e5e7eb;
+  color: #2a2185;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.year-nav:hover {
+  background: #2a2185;
+  color: white;
+  border-color: #2a2185;
+}
+
+.year-nav.prev {
+  left: -16px;
+}
+
+.year-nav.next {
+  right: -16px;
+}
+
+.year-nav.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .year-selector {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .year-scroll button {
+    padding: 6px 16px;
+    font-size: 14px;
+    min-width: 80px;
+  }
+
+  .year-nav {
+    width: 28px;
+    height: 28px;
+  }
+}
+.autocomplete-list {
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: white;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.autocomplete-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.autocomplete-list li:hover {
+  background-color: #ddd;
+}
+
+/* Conteneur des boutons d'en-tête */
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: 15px;
+}
+
+/* Style commun pour les boutons d'en-tête */
+.header-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style spécifique pour le bouton d'ajout dans l'en-tête */
+.btn-add.header-btn {
+  background: linear-gradient(135deg, #2a2185, #1a224f);
+}
+
+/* Style spécifique pour le bouton de modification dans l'en-tête */
+.btn-update.header-btn {
+  background: linear-gradient(135deg, #3f51b5, #1a237e);
+}
+
+/* Effet au survol */
+.header-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Mise à jour du style de la barre de navigation pour accommoder les boutons */
+nav {
+  height: 80px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  gap: 15px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Adaptation pour les écrans plus petits */
+@media (max-width: 768px) {
+  .header-btn span {
+    display: none; /* Cache le texte des boutons sur mobile */
+  }
+
+  .header-btn {
+    padding: 8px;
+  }
+
+  .header-buttons {
+    margin-left: 5px;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .search-container {
+    max-width: 150px;
+  }
+}
+
+/* Pour très petits écrans, optimisation supplémentaire */
+@media (max-width: 400px) {
+  nav img {
+    width: 70px; /* Réduire la taille du logo */
+  }
+
+  .search-container {
+    max-width: 120px;
+  }
+}
+
+/* Style pour la bannière de notification */
+.notification-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2b253a; /* Couleur foncée comme dans votre exemple */
+  color: white;
+  padding: 12px 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+}
+
+.notification-content i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.notification-close:hover {
+  opacity: 0.8;
+}
+
+/* Pour l'animation, optionnel */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.month-past {
+  background-color: #ffeeee;
+}
+
+.past-month {
+  opacity: 0.7;
+  border: 1px solid #ffcccc;
+}
+
+option:disabled {
+  color: #ff0000 !important;
+  font-style: italic;
+}
+
+.month-plan-card.past-month input:disabled {
+  background-color: #ffeeee;
+}
+
+/* Pour le message de statut */
+.month-status.month-past {
+  background-color: #ff6666;
+  color: white;
+  font-size: 0.8em;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+/* Styles pour le popup d'ajout multiple */
+.multi-popup {
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.common-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  margin-bottom: 20px;
+}
+
+.month-plans-container {
+  margin-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 15px;
+}
+
+.month-plans-container h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.month-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* <-- 2 colonnes fixes */
+  gap: 15px;
+}
+
+
+.month-plan-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.month-plan-card.disabled {
+  opacity: 0.6;
+  background-color: #f0f0f0;
+}
+
+.month-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.month-header h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.month-status {
+  font-size: 12px;
+}
+
+.month-used {
+  color: #e53935;
+}
+
+.form-group.small {
+  margin-bottom: 8px;
+}
+
+.form-group.small label {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.form-group.small input {
+  height: 30px;
+  padding: 5px 8px;
+  font-size: 13px;
+}
+
+/* Style pour le bouton d'ajout multiple */
+.btn-multi-add {
+  background-color: #4CAF50;
+}
+
+.btn-multi-add:hover {
+  background-color: #43A047;
+}
+
+/* Pour le responsive */
+@media (max-width: 768px) {
+  .common-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .month-plans-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
+
+

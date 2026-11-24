@@ -1,0 +1,237 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  body {
+    background: #f8f9fa;
+  }
+  
+  /* Main Container Styles */
+  .main {
+    padding: 30px;
+    background: #f8f9fa;
+    min-height: calc(100vh - 80px);
+  }
+  
+  /* Navigation Bar */
+  nav {
+    height: 80px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    gap: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 24px;
+  }
+  
+  nav .back {
+    font-size: 28px;
+    color: #2a2185;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  nav .back:hover {
+    color: #FF5C57;
+    transform: translateX(-3px);
+  }
+  
+  nav h2 {
+    color: #2a2185;
+    font-weight: 600;
+  }
+  
+  /* Router Link Styles */
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background: #ffffff;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #2a2185;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+  }
+  
+  .nav-link:hover {
+    background: #2a2185;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(42, 33, 133, 0.2);
+  }
+  
+  .nav-link .icon-card {
+    font-size: 20px;
+    margin-right: 12px;
+  }
+  
+  /* Table Container */
+  .table-container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* Table Styles */
+  .content-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .content-table thead {
+    background: linear-gradient(135deg, #2a2185 0%, #1a224f 100%);
+    color: #ffffff;
+  }
+  
+  .content-table th {
+    padding: 16px 24px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  .content-table tbody tr {
+    border-bottom: 1px solid rgba(42, 33, 133, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .content-table tbody tr:hover {
+    background: rgba(42, 33, 133, 0.02);
+  }
+  
+  .content-table td {
+    padding: 16px 24px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Action Buttons */
+  .action-btn {
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 4px;
+    background: transparent;
+  }
+  
+  .action-btn i {
+    font-size: 20px;
+  }
+  
+  .action-btn.edit {
+    color: #2a2185;
+  }
+  
+  .action-btn.edit:hover {
+    background: rgba(42, 33, 133, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .action-btn.delete {
+    color: #FF5C57;
+  }
+  
+  .action-btn.delete:hover {
+    background: rgba(255, 92, 87, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  /* Not Found Message */
+  .not-found-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    color: #2a2185;
+    gap: 16px;
+  }
+  
+  .not-found-message i {
+    font-size: 48px;
+    color: rgba(42, 33, 133, 0.2);
+  }
+  
+  .not-found-message p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+
+  .message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .main {
+      padding: 20px;
+    }
+  
+    nav {
+      padding: 0 20px;
+      height: 70px;
+    }
+  
+    .content-table th,
+    .content-table td {
+      padding: 12px 16px;
+    }
+  
+    .nav-link {
+      padding: 10px 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main {
+      padding: 15px;
+    }
+  
+    nav {
+      padding: 0 15px;
+      height: 60px;
+    }
+  
+    .nav-link {
+      padding: 8px 16px;
+    }
+  
+    .content-table th,
+    .content-table td {
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+  
+    .action-btn i {
+      font-size: 18px;
+    }
+  }

@@ -1,0 +1,41 @@
+<div class="main">
+  <nav>
+    <i class='bx bx-chevron-left back' (click)="navigateTo('/admin/dashboard')"></i>
+    <h2>Roles List</h2>
+  </nav>
+
+  <a (click)="navigateTo('/admin/dashboard/roleform')" class="nav-link">
+    <i class='bx bx-plus-medical bx-rotate-270 icon-card'></i>
+    <span class="link">Add New Role</span>
+  </a>
+
+  <div class="table-container">
+    <div class="message" *ngIf="message" [class]="messageType">
+      {{ message }}
+    </div>
+
+    <table class="content-table" *ngIf="roles.length > 0">
+      <thead>
+        <tr>
+          <th>Role name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles">
+          <td>{{ role.name }}</td>
+          <td>
+            <button class="action-btn edit" (click)="editRole(role.id)">
+              <i class='bx bx-edit'></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="not-found-message" *ngIf="roles.length === 0">
+      <i class='bx bx-user-x'></i>
+      <p>No roles available</p>
+    </div>
+  </div>
+</div>

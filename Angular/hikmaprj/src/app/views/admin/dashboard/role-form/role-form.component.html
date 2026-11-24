@@ -1,0 +1,30 @@
+<div class="main">
+  <div class="form-container">
+    <form [formGroup]="roleForm" (ngSubmit)="onSubmit()" class="role-form">
+      <div class="form-group">
+        <label for="name">Role name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [class.error]="roleForm.get('name')?.invalid && roleForm.get('name')?.touched"
+        >
+        <div class="error-message" *ngIf="roleForm.get('name')?.invalid && roleForm.get('name')?.touched">
+          Role name is required
+        </div>
+      </div>
+
+      <div class="message success" *ngIf="success">{{ success }}</div>
+      <div class="message error" *ngIf="error">{{ error }}</div>
+
+      <button
+        type="submit"
+        class="submit-btn"
+        [disabled]="roleForm.invalid || isSubmitting"
+      >
+        {{ isSubmitting ? (isEditMode ? 'Updating...' : 'Creating...') : (isEditMode ? 'Update Role' : 'Create Role') }}
+      </button>
+    </form>
+  </div>
+</div>

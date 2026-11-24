@@ -1,0 +1,164 @@
+<nav>
+  <a (click)="goBack()">
+    <i class='bx bxs-left-arrow-circle back'></i>
+  </a>
+  <img src="assets/hikma.png" width="90px">
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearchInput($event)"
+           placeholder="Looking for something..." class="search-bar" autocomplete="off">
+    <button class="search-btn"><i class="fas fa-search"></i></button>
+  </div>
+
+  <button *ngIf="canExportOrUpdate" (click)="synchronizeYearData()" [disabled]="isLoading" class="actualiser-btn">
+    <i class="fas fa-sync-alt" [ngClass]="{'animate-spin-slow': isLoading}"></i>
+    Actualiser
+  </button>
+
+  <span *ngIf="lastUpdateDate" class="last-update" style="margin-left:10px; font-size:14px;">
+    Dernière actualisation : {{ lastUpdateDate | date:'dd/MM/yyyy HH:mm:ss' }}
+  </span>
+  <button *ngIf="canExportOrUpdate" class="export-button" (click)="exportExcel()">
+  📦 Export Excel negative values
+</button>
+
+</nav>
+
+<div class="main">
+  <div class="table-container">
+    <div *ngIf="error" class="error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <p>{{ error }}</p>
+    </div>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <!-- Colonnes fixes -->
+          <th *ngFor="let column of displayColumns">
+            {{ column }}
+            <i class="fas fa-filter filter-icon"
+               [class.active]="showFilter[column]"
+               (click)="toggleFilter(column, $event)"></i>
+            <div *ngIf="showFilter[column]" class="filter-container" (click)="$event.stopPropagation()">
+              <input [(ngModel)]="filters[column]" (input)="onFilterChange(column, $event)"
+                     class="filter-input" placeholder="Filter..." autocomplete="off"
+                     (click)="$event.stopPropagation()">
+            </div>
+          </th>
+
+          <!-- Dispo_Of -->
+          <th>
+            Dispo_Of
+            <i class="fas fa-filter filter-icon" [class.active]="showFilter['Dispo_Of']"
+               (click)="toggleFilter('Dispo_Of', $event)"></i>
+            <div *ngIf="showFilter['Dispo_Of']" class="filter-container">
+              <input [(ngModel)]="filters['Dispo_Of']" (input)="onFilterChange('Dispo_Of', $event)"
+                     class="filter-input" placeholder="Filter..." autocomplete="off">
+            </div>
+          </th>
+
+          <!-- Update Article -->
+          <th>Update Article</th>
+
+          <!-- 3 colonnes par mois -->
+          <ng-container *ngFor="let month of monthsForSelectedYear; let i = index">
+            <!-- Besoin -->
+            <th [ngClass]="{'light-column': i % 2 === 0, 'dark-column': i % 2 !== 0}">
+              Besoin {{ month }}
+              <i class="fas fa-filter filter-icon"
+                 [class.active]="showFilter['besoin_'+month]"
+                 (click)="toggleFilter('besoin_'+month, $event)"></i>
+              <div *ngIf="showFilter['besoin_'+month]" class="filter-container">
+                <input [(ngModel)]="filters['besoin_'+month]" (input)="onFilterChange('besoin_'+month, $event)"
+                       class="filter-input" placeholder="Filter..." autocomplete="off">
+              </div>
+            </th>
+            <!-- Stk Fin Brut -->
+            <th [ngClass]="{'light-column': i % 2 === 0, 'dark-column': i % 2 !== 0}">
+              Stk Fin {{ month }} Brut
+              <i class="fas fa-filter filter-icon"
+                 [class.active]="showFilter['stockFin_'+month]"
+                 (click)="toggleFilter('stockFin_'+month, $event)"></i>
+              <div *ngIf="showFilter['stockFin_'+month]" class="filter-container">
+                <input [(ngModel)]="filters['stockFin_'+month]" (input)="onFilterChange('stockFin_'+month, $event)"
+                       class="filter-input" placeholder="Filter..." autocomplete="off">
+              </div>
+            </th>
+            <!-- Stk Fin Inclus Liv -->
+            <th [ngClass]="{'light-column': i % 2 === 0, 'dark-column': i % 2 !== 0}">
+              Stk Fin {{ month }} Inclus Liv
+              <i class="fas fa-filter filter-icon"
+                 [class.active]="showFilter['stockFinMoisInclusLiv_'+month]"
+                 (click)="toggleFilter('stockFinMoisInclusLiv_'+month, $event)"></i>
+              <div *ngIf="showFilter['stockFinMoisInclusLiv_'+month]" class="filter-container">
+                <input [(ngModel)]="filters['stockFinMoisInclusLiv_'+month]" (input)="onFilterChange('stockFinMoisInclusLiv_'+month, $event)"
+                       class="filter-input" placeholder="Filter..." autocomplete="off">
+              </div>
+            </th>
+
+
+          </ng-container>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngIf="filteredStockData.length === 0">
+          <td [attr.colspan]="displayColumns.length + 1 + (monthsForSelectedYear.length * 3)" class="not-found">
+            <i class="fas fa-search"></i>
+            No results found{{ searchQuery ? ' for \"' + searchQuery + '\"' : '' }}
+          </td>
+        </tr>
+
+        <tr *ngFor="let item of filteredStockData">
+          <!-- valeurs fixes -->
+          <td *ngFor="let column of displayColumns">{{ item[column] }}</td>
+          <td>{{ item['Dispo_Of'] }}</td>
+          <td>
+            <button class="update-btn"
+                    (click)="updateBesoinMoisForArticle(convertToString(item.article))"
+                    [disabled]="isLoading">
+              Update Article
+            </button>
+          </td>
+
+          <!-- 3 cellules par mois -->
+          <ng-container *ngFor="let month of monthsForSelectedYear">
+            <!-- Besoin -->
+            <td [ngClass]="{'negative': item['besoin_'+month] < 0}">
+              {{ item['besoin_'+month] }}
+            </td>
+            <!-- Stk Fin Brut -->
+            <td [ngClass]="{'negative': item['stockFin_'+month] < 0}">
+              {{ item['stockFin_'+month] }}
+            </td>
+            <!-- Stk Fin Inclus Liv -->
+            <td [ngClass]="{'negative': item['stockFinMoisInclusLiv_'+month] < 0}">
+              {{ item['stockFinMoisInclusLiv_'+month] }}
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="pageInfo && filteredStockData.length > 0" class="pagination-controls">
+      <div class="pagination-buttons">
+        <button [disabled]="!pageInfo.hasPrevious" (click)="onPageChange(currentPage - 1)"
+                class="page-btn prev-next" aria-label="Previous page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <ng-container *ngFor="let page of getVisiblePages()">
+          <button *ngIf="!isEllipsis(page)"
+                  [class.active]="getPageNumber(page) === currentPage"
+                  (click)="onPageChange(getPageNumber(page))" class="page-btn">
+            {{ getPageNumber(page) + 1 }}
+          </button>
+          <span *ngIf="isEllipsis(page)" class="ellipsis">…</span>
+        </ng-container>
+        <button [disabled]="!pageInfo.hasNext" (click)="onPageChange(currentPage + 1)"
+                class="page-btn prev-next" aria-label="Next page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

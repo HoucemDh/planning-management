@@ -1,0 +1,534 @@
+<nav>
+  <a (click)="goBack()">
+    <i class="fas fa-arrow-left back"></i>
+  </a>
+  <img src="assets/hikma.png" width="90px">
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearchInput($event)" placeholder="Rechercher..." class="search-bar">
+    <button class="search-btn"><i class="fas fa-search"></i></button>
+  </div>
+  <!-- Nouveaux boutons dans l'en-tête -->
+  <div class="header-buttons">
+    <button *ngIf="canAddOrUpdate" class="btn-update header-btn" (click)="openUpdatePopup(plans)">
+      <i class="fas fa-edit"></i>
+      <span>Modifier</span>
+    </button>
+    <button *ngIf="canAddOrUpdate" class="btn-add header-btn" (click)="togglePopup()">
+      <i class="fas fa-plus"></i>
+      <span>Ajouter</span>
+    </button>
+
+    <button *ngIf="canAddOrUpdate" class="btn-multi-add header-btn" (click)="toggleMultiAddPopup()">
+      <i class="fas fa-calendar-plus"></i>
+      <span>Ajouter plans multiples</span>
+    </button>
+  </div>
+
+
+  <!-- Bannière de notification pour les erreurs -->
+<div class="notification-banner" *ngIf="error" [@bannerAnimation]>
+  <div class="notification-content">
+    <i class="fas fa-exclamation-circle"></i>
+    <span>{{ error }}</span>
+  </div>
+  <button class="notification-close" (click)="closeErrorNotification()">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
+
+</nav>
+
+<div class="main">
+  <div class="year-selector">
+    <button class="year-nav prev" (click)="scrollYears('left')" [class.disabled]="isScrollStart">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <div class="year-scroll" #yearScroll>
+      <button
+        *ngFor="let year of availableYears"
+        [class.active]="selectedYear === year"
+        (click)="selectYear(year)"
+      >
+        {{ year }}
+      </button>
+    </div>
+
+    <button class="year-nav next" (click)="scrollYears('right')" [class.disabled]="isScrollEnd">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <div class="table-container">
+
+
+    <div *ngIf="paginatedPlans.length === 0" class="not-found-message">
+      <i class="fas fa-search"></i>
+      <p>Aucun résultat trouvé{{ searchQuery ? ' pour "' + searchQuery + '"' : '' }}</p>
+    </div>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns" class="sticky-column">
+            {{ column }}
+            <i class="fas fa-filter filter-icon"
+               [class.active]="showFilter[column]"
+               (click)="toggleFilter(column, $event)"></i>
+            <div *ngIf="showFilter[column]" class="filter-container" (click)="$event.stopPropagation()">
+              <input [(ngModel)]="filters[column]" (input)="onFilterChange(column, $event)"
+                     class="filter-input" placeholder="Filter..." autocomplete="off"
+                     (click)="$event.stopPropagation()">
+            </div>
+          </th>
+          <ng-container *ngFor="let month of months; let i = index">
+            <th [ngClass]="{'dark-column': i % 2 === 0, 'light-column': i % 2 !== 0}">Prévue {{ month }}</th>
+            <th [ngClass]="{'dark-column': i % 2 === 0, 'light-column': i % 2 !== 0}">Lancé {{ month }}</th>
+            <th [ngClass]="{'dark-column': i % 2 === 0, 'light-column': i % 2 !== 0}">Reste {{ month }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="paginatedPlans.length === 0">
+          <td [attr.colspan]="columns.length + months.length * 3" class="no-results">Aucun résultat n'est trouvé</td>
+        </tr>
+        <tr *ngFor="let plan of paginatedPlans">
+          <td>{{ plan.produit.reference }}</td>
+          <td>{{ plan.produit.libelle }}</td>
+          <td>{{ plan.produit.tailleLot }}</td>
+          <ng-container *ngFor="let month of months">
+            <td>{{ plan.monthlyData[month] ? plan.monthlyData[month].prevueLancer : 0 }}</td>
+            <td>{{ plan.monthlyData[month] ? plan.monthlyData[month].lancer : 0 }}</td>
+            <td>{{ plan.monthlyData[month] ? plan.monthlyData[month].resteLancer : 0 }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="totalPages > 1" class="pagination-controls">
+      <div class="pagination-buttons">
+        <button
+          class="page-btn prev-next"
+          (click)="changePage(-1)"
+          [disabled]="currentPage === 1">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <ng-container *ngFor="let page of getVisiblePages()">
+          <button
+            *ngIf="!isEllipsis(page)"
+            [class.active]="getPageNumber(page) === currentPage"
+            (click)="onPageChange(getPageNumber(page))"
+            class="page-btn">
+            {{ getPageNumber(page) }}
+          </button>
+          <span *ngIf="isEllipsis(page)" class="ellipsis">...</span>
+        </ng-container>
+
+        <button
+          class="page-btn prev-next"
+          (click)="changePage(1)"
+          [disabled]="currentPage === totalPages">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="popup" *ngIf="showUpdatePopup" (click)="closePopupOnOverlay($event)">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h2>Modifier un Plan</h2>
+      <button class="close-btn" (click)="closeUpdatePopup()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="form-container">
+      <form (ngSubmit)="updatePlan()">
+        <div class="form-group autocomplete">
+          <label>
+            <i class="fas fa-tag"></i>
+            Libellé
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="planToUpdate.libelle"
+            name="libelle"
+            required
+            (input)="filterLibellesForUpdate()"
+            placeholder="Rechercher un libellé"
+            class="search-bar"
+          />
+          <ul *ngIf="filteredLibelles.length > 0 && planToUpdate.libelle" class="autocomplete-list">
+            <li *ngFor="let libelle of filteredLibelles" (click)="selectLibelleForUpdate(libelle)">
+              {{ libelle }}
+            </li>
+          </ul>
+        </div>
+
+<div class="form-group">
+  <label>
+    <i class="fas fa-barcode"></i>
+    Référence
+  </label>
+  <input
+    type="text"
+    [(ngModel)]="planToUpdate.reference"
+    name="reference"
+    readonly
+    placeholder="Rempli automatiquement"
+  >
+</div>
+
+<div class="form-group">
+  <label>
+    <i class="fas fa-calendar"></i>
+    Mois
+  </label>
+  <select [(ngModel)]="planToUpdate.mois" (ngModelChange)="onUpdateMonthChange($event)" name="mois" required>
+    <option value="">Sélectionnez un mois</option>
+    <option *ngFor="let month of months"
+            [value]="month"
+            [disabled]="isMonthInPast(month, planToUpdate.year)"
+            [ngStyle]="{'color': isMonthInPast(month, planToUpdate.year) ? 'red' : 'inherit'}">
+      {{ month }}
+    </option>
+  </select>
+</div>
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-calendar-alt"></i>
+            Année
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="planToUpdate.year"
+            name="year"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-box"></i>
+            Prévu {{ planToUpdate.mois }}
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="planToUpdate.prevueLancer"
+            name="prevueLancer"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-play"></i>
+            Lancé {{ planToUpdate.mois }}
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="planToUpdate.lancerActuelle"
+            name="lancerActuelle"
+            required
+          >
+        </div>
+
+        <button type="submit" class="submit-btn">Modifier le plan</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="popup" *ngIf="showPopup" (click)="closePopupOnOverlay($event)">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h2>Ajouter un Plan</h2>
+      <button class="close-btn" (click)="togglePopup()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="form-container">
+      <form (ngSubmit)="addPlan()">
+        <div class="form-group autocomplete">
+          <label>
+            <i class="fas fa-tag"></i>
+            Libellé
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="newPlan.libelle"
+            name="libelle"
+            required
+            (input)="filterLibelles()"
+            placeholder="Rechercher un libellé"
+            class="search-bar"
+          />
+          <ul *ngIf="filteredLibelles.length > 0 && newPlan.libelle" class="autocomplete-list">
+            <li *ngFor="let libelle of filteredLibelles" (click)="selectLibelle(libelle)">
+              {{ libelle }}
+            </li>
+          </ul>
+        </div>
+
+<!-- Ajouter après le champ libellé et avant le champ mois -->
+<div class="form-group">
+  <label>
+    <i class="fas fa-barcode"></i>
+    Référence
+  </label>
+  <input
+    type="text"
+    [(ngModel)]="newPlan.reference"
+    name="reference"
+    readonly
+    placeholder="Rempli automatiquement"
+  >
+</div>
+
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-calendar"></i>
+            Mois
+          </label>
+          <select [(ngModel)]="newPlan.selectedMonth" name="mois" required>
+            <option value="">Sélectionnez un mois</option>
+            <option *ngFor="let month of months"
+                    [value]="month"
+                    [disabled]="isMonthDisabled(month)"
+                    [style.color]="getMonthStatus(month).isUsedByCurrentLibelle ? 'red' : 'inherit'">
+              {{ month }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-calendar-alt"></i>
+            Année
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="newPlan.year"
+            name="year"
+            required
+            placeholder="Entrer l'année"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-box"></i>
+            Prévu {{ newPlan.selectedMonth }}
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="newPlan.prevueLancer"
+            name="prevueLancer"
+            required
+            (input)="updateMonthFields()"
+            placeholder="Entrer la quantité prévue"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-play"></i>
+            Lancé {{ newPlan.selectedMonth }}
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="newPlan.lancer"
+            name="lancerActuelle"
+            required
+            (input)="updateMonthFields()"
+            placeholder="Entrer la quantité lancée"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-calculator"></i>
+            Reste {{ newPlan.selectedMonth }}
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="newPlan.resteLancer"
+            name="resteLancer"
+            readonly
+            placeholder="Calculé automatiquement"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>
+            <i class="fas fa-ruler"></i>
+            Taille Lot
+          </label>
+          <input
+            type="number"
+            [(ngModel)]="newPlan.tailleLot"
+            name="tailleLot"
+            required
+            readonly
+            placeholder="Rempli automatiquement"
+          >
+        </div>
+
+        <button type="submit" class="submit-btn">Ajouter le plan</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Popup pour ajouter plusieurs plans -->
+<div class="popup" *ngIf="showMultiAddPopup" (click)="closeMultiAddPopupOnOverlay($event)">
+  <div class="popup-content multi-popup">
+    <div class="popup-header">
+      <h2>Ajouter des Plans Multiples</h2>
+      <button class="close-btn" (click)="toggleMultiAddPopup()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="form-container">
+      <form (ngSubmit)="addMultiplePlans()">
+        <div class="common-fields">
+          <div class="form-group autocomplete">
+            <label>
+              <i class="fas fa-tag"></i>
+              Libellé
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="multiPlan.libelle"
+              name="multiLibelle"
+              required
+              (input)="filterLibellesForMulti()"
+              placeholder="Rechercher un libellé"
+              class="search-bar"
+            />
+            <ul *ngIf="filteredLibelles.length > 0 && multiPlan.libelle" class="autocomplete-list">
+              <li *ngFor="let libelle of filteredLibelles" (click)="selectLibelleForMulti(libelle)">
+                {{ libelle }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <i class="fas fa-barcode"></i>
+              Référence
+            </label>
+            <input
+              type="text"
+              [(ngModel)]="multiPlan.reference"
+              name="multiReference"
+              readonly
+              placeholder="Rempli automatiquement"
+            >
+          </div>
+
+          <div class="form-group">
+            <label>
+              <i class="fas fa-calendar-alt"></i>
+              Année
+            </label>
+            <input
+              type="number"
+              [(ngModel)]="multiPlan.year"
+              name="multiYear"
+              required
+              placeholder="Entrer l'année"
+              (change)="updateMonthsAvailability()"
+            >
+          </div>
+
+          <div class="form-group">
+            <label>
+              <i class="fas fa-ruler"></i>
+              Taille Lot
+            </label>
+            <input
+              type="number"
+              [(ngModel)]="multiPlan.tailleLot"
+              name="multiTailleLot"
+              required
+              readonly
+              placeholder="Rempli automatiquement"
+            >
+          </div>
+        </div>
+
+        <div class="month-plans-container">
+          <h3>Plans Mensuels</h3>
+          <div class="month-plans-grid">
+            <div *ngFor="let monthPlan of multiPlan.monthPlans; let i = index"
+            class="month-plan-card"
+            [class.disabled]="!monthPlan.isEnabled || isMonthInPast(monthPlan.month, multiPlan.year)"
+            [class.past-month]="isMonthInPast(monthPlan.month, multiPlan.year)">
+         <div class="month-header">
+           <h4 [ngStyle]="{'color': isMonthInPast(monthPlan.month, multiPlan.year) ? 'red' : 'inherit'}">
+             {{ monthPlan.month }}
+           </h4>
+           <div class="month-status"
+                [ngClass]="{'month-used': !monthPlan.isEnabled, 'month-past': isMonthInPast(monthPlan.month, multiPlan.year)}">
+             <span *ngIf="!monthPlan.isEnabled">Déjà utilisé</span>
+             <span *ngIf="isMonthInPast(monthPlan.month, multiPlan.year)">Mois passé</span>
+           </div>
+         </div>
+
+         <div class="form-group small">
+           <label>Prévu</label>
+           <input
+             type="number"
+             [(ngModel)]="monthPlan.prevueLancer"
+             [name]="'prevue' + i"
+             [disabled]="!monthPlan.isEnabled || isMonthInPast(monthPlan.month, multiPlan.year)"
+             (input)="updateMonthReste(i)"
+             placeholder="Prévu"
+           >
+         </div>
+
+         <div class="form-group small">
+           <label>Lancé</label>
+           <input
+             type="number"
+             [(ngModel)]="monthPlan.lancer"
+             [name]="'lance' + i"
+             [disabled]="!monthPlan.isEnabled || isMonthInPast(monthPlan.month, multiPlan.year)"
+             (input)="updateMonthReste(i)"
+             placeholder="Lancé"
+           >
+         </div>
+
+         <div class="form-group small">
+           <label>Reste</label>
+           <input
+             type="number"
+             [(ngModel)]="monthPlan.resteLancer"
+             [name]="'reste' + i"
+             readonly
+             [disabled]="!monthPlan.isEnabled || isMonthInPast(monthPlan.month, multiPlan.year)"
+             placeholder="Reste"
+           >
+         </div>
+       </div>
+
+
+
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Ajouter les plans</button>
+      </form>
+    </div>
+  </div>
+</div>

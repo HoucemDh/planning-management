@@ -1,0 +1,34 @@
+<div class="dashboard-container">
+  <div class="section-header">
+    <h2>PowerBI Analytics</h2>
+    <div class="section-actions">
+      <button class="action-btn" (click)="refreshDashboard()">
+        <i class='bx bx-refresh'></i> Refresh
+      </button>
+      <button class="action-btn secondary" (click)="downloadReport()">
+        <i class='bx bx-fullscreen'></i> Fullscreen
+      </button>
+
+    </div>
+  </div>
+
+  <div class="powerbi-container">
+    <div class="powerbi-placeholder" [ngClass]="{'is-loading': isLoading}">
+      <!-- Indicateur de chargement amélioré -->
+      <div class="powerbi-loading" *ngIf="isLoading">
+        <i class='bx bx-loader-alt bx-spin'></i>
+        <p>Chargement du dashboard en cours...</p>
+      </div>
+
+      <!-- Iframe Power BI avec animation de transition -->
+      <iframe *ngIf="!isLoading"
+        title="Power BI Report"
+        width="100%"
+        height="100%"
+        [src]="iframeSrc"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>

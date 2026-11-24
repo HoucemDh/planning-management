@@ -1,0 +1,51 @@
+<div class="body">
+  <div class="container">
+    <!-- Sidebar Navigation Component -->
+    <app-sidebar
+      [activeMenu]="activeMenu"
+      [menuCollapsed]="menuCollapsed"
+      (menuChange)="onMenuChange($event)"
+      (logout)="logout()">
+    </app-sidebar>
+
+    <!-- Main Content -->
+    <div class="main" [ngClass]="{'active': menuCollapsed}">
+      <!-- Topbar Component -->
+      <app-topbar
+        [menuCollapsed]="menuCollapsed"
+        (toggleMenuEvent)="toggleMenu()">
+      </app-topbar>
+
+      <!-- Content Area -->
+      <div class="content-wrapper">
+        <!-- Dashboard View-->
+        <app-dashboard-view
+          *ngIf="activeMenu === 'dashboard'"
+          [currentDate]="currentDate">
+        </app-dashboard-view>
+
+        <!-- Consultation Tables View -->
+        <app-consultation-view
+          *ngIf="activeMenu === 'consultation'"
+          (navigateToModule)="onNavigateToModule($event)">
+        </app-consultation-view>
+
+        <!-- PowerBI Dashboard View -->
+        <app-powerbi-view
+          *ngIf="activeMenu === 'powerbi'">
+        </app-powerbi-view>
+
+        <!-- AI Analysis Tool View -->
+        <app-ai-analysis
+          *ngIf="activeMenu === 'ai-analysis'">
+        </app-ai-analysis>
+
+
+        <app-user-management
+          *ngIf="activeMenu === 'user-management'">
+        </app-user-management>
+
+      </div>
+    </div>
+  </div>
+</div>
