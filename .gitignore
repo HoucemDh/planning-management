@@ -1,0 +1,28 @@
+# Spring Boot / Maven
+Springboot/hikmaproject/target/
+*.class
+*.log
+
+# Angular / Node
+Angular/hikmaprj/node_modules/
+Angular/hikmaprj/dist/
+Angular/hikmaprj/.angular/
+Angular/hikmaprj/coverage/
+npm-debug.log*
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.factorypath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.env
+set-env.ps1
